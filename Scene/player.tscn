@@ -17,12 +17,13 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8hkk"]
 size = Vector2(32, 21)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
+motion_mode = 1
 script = ExtResource("1_ri4nv")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_wy5f3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
