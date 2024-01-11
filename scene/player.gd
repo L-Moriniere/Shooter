@@ -1,18 +1,35 @@
 extends CharacterBody2D
 
-
-const SPEED = 300.0
-
 @export var speed = 400
 
-var last_direction = Vector2.ZERO
+const LASER = preload("res://scene/laser.tscn")
+
+var last_direction = Vector2.RIGHT
+
+func _physics_process(delta):
+	get_input()
+	look_at(self.global_position)
+	move_and_slide()
+
+
+func shoot():
+	var new_laser = LASER.instantiate()
+	$Node2D.add_child(new_laser)
+		
+	var starting_position = %ShootingPointLeftExt.global_position
+	var dir = last_direction.normalized()
+	var _rotation = rad_to_deg(atan2(dir.y, dir.x))
+	new_laser.start(starting_position, last_direction, _rotation)
+
+
 
 func get_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
-
-
 	#if we are moving
 	if input_direction.length_squared() > 0:
+		last_direction = input_direction.normalized()  
+
+		
 		
 		if input_direction.x != 0 and input_direction.y != 0:
 
@@ -39,6 +56,10 @@ func get_input():
 
 	velocity = input_direction * speed
 
-func _physics_process(delta):
-	get_input()
-	move_and_slide()
+
+
+
+
+
+func _on_timer_timeout():
+	shoot()
