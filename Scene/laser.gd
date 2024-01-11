@@ -1,6 +1,6 @@
 extends Area2D
 
-@export var speed = 1500
+@export var speed = 1000
 var velocity = Vector2()
 
 func _physics_process(delta):
@@ -15,7 +15,6 @@ func start(_position, _direction, _rotation):
 
 	
 func _on_body_entered(body):
-	queue_free()
 	if body.has_method("take_damage"):
 		body.take_damage()
 

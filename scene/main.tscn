@@ -1,9 +1,29 @@
-[gd_scene load_steps=3 format=3 uid="uid://dp6vancm0x2mo"]
+[gd_scene load_steps=4 format=3 uid="uid://dp6vancm0x2mo"]
 
 [ext_resource type="Script" path="res://scene/main.gd" id="1_1w23u"]
 [ext_resource type="PackedScene" uid="uid://b4wkicqm77rwm" path="res://scene/player.tscn" id="1_xfttf"]
+[ext_resource type="PackedScene" uid="uid://b7hjgt1bk3mqn" path="res://scene/mob.tscn" id="3_ujg6a"]
 
-[node name="Main" type="Node"]
+[node name="Main" type="Node2D"]
 script = ExtResource("1_1w23u")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 600.0
+offset_bottom = 600.0
+size_flags_vertical = 4
+color = Color(0, 0, 0.168627, 1)
+
 [node name="Player" parent="." instance=ExtResource("1_xfttf")]
+position = Vector2(297, 54)
+
+[node name="Mob" parent="." instance=ExtResource("3_ujg6a")]
+position = Vector2(63, 439)
+
+[node name="Mob2" parent="." instance=ExtResource("3_ujg6a")]
+position = Vector2(226, 461)
+
+[node name="Mob3" parent="." instance=ExtResource("3_ujg6a")]
+position = Vector2(362, 464)
+
+[node name="Mob4" parent="." instance=ExtResource("3_ujg6a")]
+position = Vector2(512, 434)
