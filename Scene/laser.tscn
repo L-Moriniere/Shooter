@@ -9,6 +9,7 @@ b = Vector2(-9, -1)
 
 [node name="Laser" type="Area2D"]
 top_level = true
+rotation = 1.57079
 script = ExtResource("1_b4ku5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

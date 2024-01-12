@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed = 1000
-var velocity = Vector2()
+var velocity = Vector2.DOWN
 
 func _physics_process(delta):
 	#laser qui suit la direction de la position initiale

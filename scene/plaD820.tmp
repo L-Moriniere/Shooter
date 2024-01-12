@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b4wkicqm77rwm"]
+[gd_scene load_steps=13 format=3 uid="uid://b4wkicqm77rwm"]
 
 [ext_resource type="Script" path="res://scene/player.gd" id="1_grmq8"]
 [ext_resource type="Texture2D" uid="uid://wlydvvl0cc0c" path="res://assets/sprite_d.png" id="2_n5kfe"]
@@ -9,9 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://c48dfg3568gc6" path="res://assets/sprite_u.png" id="7_acw27"]
 [ext_resource type="Texture2D" uid="uid://dcfofdgqb7ftp" path="res://assets/sprite_ul.png" id="8_62ykh"]
 [ext_resource type="Texture2D" uid="uid://d3fbuwl3ifvs5" path="res://assets/sprite_ur.png" id="9_2kna5"]
+[ext_resource type="Texture2D" uid="uid://dvo48mj0wg6fl" path="res://assets/explode1.png" id="10_152tu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8hkk"]
-size = Vector2(33, 21)
+size = Vector2(32, 21)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wy5f3"]
 animations = [{
@@ -86,7 +87,7 @@ script = ExtResource("1_grmq8")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, -0.5)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_m8hkk")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -101,31 +102,13 @@ autostart = true
 [node name="LeftWing" type="Node2D" parent="."]
 position = Vector2(15.31, 0)
 
-[node name="ShootingPointLExt" type="Marker2D" parent="LeftWing"]
+[node name="ShootingPointLeftExt" type="Marker2D" parent="LeftWing"]
 unique_name_in_owner = true
-position = Vector2(0, 8)
+position = Vector2(0, 15)
 scale = Vector2(0.25, 0.25)
 gizmo_extents = 0.0
 
-[node name="ShootingPointLInt" type="Marker2D" parent="LeftWing"]
-unique_name_in_owner = true
-position = Vector2(-1.5, 8)
-scale = Vector2(0.25, 0.25)
-gizmo_extents = 0.0
-
-[node name="RightWing" type="Node2D" parent="."]
-position = Vector2(-15.9, 0)
-
-[node name="ShootingPointRExt" type="Marker2D" parent="RightWing"]
-unique_name_in_owner = true
-position = Vector2(1.6, 8)
-scale = Vector2(0.25, 0.25)
-gizmo_extents = 0.0
-
-[node name="ShootingPointRInt" type="Marker2D" parent="RightWing"]
-unique_name_in_owner = true
-position = Vector2(0, 8)
-scale = Vector2(0.25, 0.25)
-gizmo_extents = 0.0
+[node name="Sprite2D" type="Sprite2D" parent="LeftWing/ShootingPointLeftExt"]
+texture = ExtResource("10_152tu")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
