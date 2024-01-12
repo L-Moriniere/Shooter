@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed = 1000
-var velocity = Vector2()
+var velocity = Vector2.DOWN
 
 func _physics_process(delta):
 	#laser qui suit la direction de la position initiale
@@ -17,6 +17,7 @@ func start(_position, _direction, _rotation):
 func _on_body_entered(body):
 	if body.has_method("take_damage"):
 		body.take_damage()
+		queue_free()
 
 
 

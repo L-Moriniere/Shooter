@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" path="res://scene/main.gd" id="1_1w23u"]
 [ext_resource type="PackedScene" uid="uid://b4wkicqm77rwm" path="res://scene/player.tscn" id="1_xfttf"]
-[ext_resource type="PackedScene" uid="uid://b7hjgt1bk3mqn" path="res://scene/mob.tscn" id="3_ujg6a"]
+
+[sub_resource type="Curve2D" id="Curve2D_4whqr"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 600, 0, 0, 0, 0, 0, 600, 599, 0, 0, 0, 0, 1, 599, 0, 0, 0, 0, 1, 0)
+}
+point_count = 5
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_1w23u")
@@ -14,16 +19,19 @@ size_flags_vertical = 4
 color = Color(0, 0, 0.168627, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_xfttf")]
-position = Vector2(297, 54)
+position = Vector2(307, 281)
 
-[node name="Mob" parent="." instance=ExtResource("3_ujg6a")]
-position = Vector2(63, 439)
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_4whqr")
 
-[node name="Mob2" parent="." instance=ExtResource("3_ujg6a")]
-position = Vector2(226, 461)
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(1, 0)
 
-[node name="Mob3" parent="." instance=ExtResource("3_ujg6a")]
-position = Vector2(362, 464)
+[node name="RoundTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
 
-[node name="Mob4" parent="." instance=ExtResource("3_ujg6a")]
-position = Vector2(512, 434)
+[node name="MobTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
