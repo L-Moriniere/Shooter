@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 @export var speed = 400
+@onready var screen_size = get_viewport_rect().size
+
+signal hit
 
 const LASER = preload("res://scene/laser.tscn")
 
@@ -10,6 +13,16 @@ func _physics_process(delta):
 	get_input()
 	look_at(self.global_position)
 	move_and_slide()
+
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+
+		var collider = collision.get_collider()
+
+		if collider.is_in_group("mobs"):
+			hide()
+			$CollisionShape2D.set_deferred("disabled", true)
+			#ajout game over ou baisse de vie
 
 
 func shoot():
@@ -54,7 +67,11 @@ func get_input():
 			else:
 				$AnimatedSprite2D.animation = "up"
 
+	#si le joueur quitte l'écran il ré apparait de l'autre côté
+	position.x = wrapf(position.x, 0, screen_size.x)
+	position.y = wrapf(position.y, 0, screen_size.y)
 	velocity = input_direction * speed
+	
 
 
 
