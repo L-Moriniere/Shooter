@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://i8rkbygcnann"]
+
+[ext_resource type="Texture2D" uid="uid://dvo48mj0wg6fl" path="res://assets/explode1.png" id="1_r57fn"]
+[ext_resource type="Texture2D" uid="uid://b2a8uqyxta4pr" path="res://assets/explode2.png" id="2_7eatf"]
+[ext_resource type="Texture2D" uid="uid://cwdkwea45y4bk" path="res://assets/explode3.png" id="3_s1v3t"]
+[ext_resource type="Texture2D" uid="uid://cm0i5ohpwbbi3" path="res://assets/explode4.png" id="4_n0jf8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y8jfv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r57fn")
+}, {
+"duration": 2.0,
+"texture": ExtResource("2_7eatf")
+}, {
+"duration": 0.5,
+"texture": ExtResource("3_s1v3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_n0jf8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="explosion" type="AnimatedSprite2D"]
+scale = Vector2(2.5, 2.5)
+sprite_frames = SubResource("SpriteFrames_y8jfv")
+frame_progress = 0.178102
