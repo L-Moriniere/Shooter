@@ -16,6 +16,7 @@ func _physics_process(delta):
 func take_damage():
 	health -= 1
 	if health == 0:
+		Globals.mob_hit += 1
 		var e = explosion.instantiate()
 		add_child(e)
 		e.play("default")

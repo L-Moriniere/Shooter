@@ -1,10 +1,8 @@
 extends Node2D
 
 const MOB = preload("res://scene/mob.tscn")
-var score
-var round
-var mob_per_round = 5
-var mob_count = 0
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -40,7 +38,16 @@ func _on_mob_timer_timeout():
 	# Choose the velocity for the mob.
 
 	# Spawn the mob by adding it to the Main scene.
-	if mob_count < mob_per_round:
+	if Globals.mob_count < Globals.mob_per_round:
 		add_child(new_mob)
-		mob_count += 1
+		Globals.mob_count += 1
+	
+	if Globals.mob_hit == Globals.mob_per_round:
+		Globals.mob_count = 0
+		Globals.mob_hit = 0
+		Globals.round += 1
+		Globals.mob_per_round += randi_range(2,4)
+		print(str(Globals.mob_hit) + " - " + str(Globals.mob_count) + " - " + str(Globals.mob_per_round))
+		get_tree().reload_current_scene()
+	#elif Globals.mob_count == Globals.mob_per_round and 
 	
