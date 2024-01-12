@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 @export var speed = 400
 @onready var screen_size = get_viewport_rect().size
+@onready var POWERUP_NODE = preload("res://scene/powerup.tscn")
 
 signal hit
 
@@ -12,12 +13,16 @@ var last_direction = Vector2.DOWN
 var target_angle : float
 var shoot_right = false
 
+	
+
+func _ready():
+	var powerup_instance = POWERUP_NODE.instantiate()
+	powerup_instance.collected.connect(self.power_up)
 
 func _physics_process(delta):
 	get_input(delta)
-	
-	move_and_slide()
 
+	move_and_slide()
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 
@@ -40,8 +45,7 @@ func shoot():
 		shoot_right = false
 	
 	var starting_position = weapon.global_position
-
-		
+	
 	var dir = last_direction.normalized()
 	var _rotation = rad_to_deg(atan2(dir.y, dir.x))
 	new_laser.start(starting_position, last_direction, _rotation)
@@ -56,13 +60,13 @@ func get_input(delta):
 	if input_direction.length_squared() > 0:
 		last_direction = input_direction.normalized()  
 		
-		
-
 	#si le joueur quitte l'écran il ré apparait de l'autre côté
 	position.x = wrapf(position.x, 0, screen_size.x)
 	position.y = wrapf(position.y, 0, screen_size.y)
 	velocity = input_direction * speed
 	
+	
+	#rotate the player
 	target_angle = Vector2.DOWN.angle_to(velocity)
 	
 	if velocity.length() > 0:
@@ -73,3 +77,11 @@ func get_input(delta):
 
 func _on_timer_timeout():
 	shoot()
+
+
+
+	
+	
+func power_up():
+	speed += 25
+	pass

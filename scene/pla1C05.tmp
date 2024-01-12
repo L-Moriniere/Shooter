@@ -80,7 +80,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_grmq8")
@@ -129,8 +129,4 @@ position = Vector2(0, 8)
 scale = Vector2(0.25, 0.25)
 gizmo_extents = 0.0
 
-[node name="PowerupTimer" type="Timer" parent="."]
-autostart = true
-
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]
