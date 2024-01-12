@@ -16,3 +16,8 @@ shape = SubResource("RectangleShape2D_7cj6i")
 [node name="Tiefighter" type="Sprite2D" parent="."]
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("1_llmag")
+
+[node name="explode" type="Timer" parent="."]
+wait_time = 0.5
+
+[connection signal="timeout" from="explode" to="." method="_on_explode_timeout"]

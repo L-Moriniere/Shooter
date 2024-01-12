@@ -12,7 +12,6 @@ func _process(delta):
 
 func _on_player_shoot(Laser, direction, location):
 	var spawned_laser = Laser.instantiate()
-
 	add_child(spawned_laser)
 	spawned_laser.rotation = direction
 	spawned_laser.position = location
