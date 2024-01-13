@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7hjgt1bk3mqn"]
+
+[ext_resource type="Texture2D" uid="uid://dcwwypqjripuo" path="res://assets/tiefighter.png" id="1_llmag"]
+[ext_resource type="Script" path="res://scene/mob.gd" id="1_w4p2d"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7cj6i"]
+size = Vector2(28, 29)
+
+[node name="Mob" type="CharacterBody2D" groups=["mobs"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_w4p2d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_7cj6i")
+
+[node name="Tiefighter" type="Sprite2D" parent="."]
+scale = Vector2(0.08, 0.08)
+texture = ExtResource("1_llmag")
+
+[node name="explode" type="Timer" parent="."]
+wait_time = 0.3
+
+[connection signal="timeout" from="explode" to="." method="_on_explode_timeout"]

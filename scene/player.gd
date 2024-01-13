@@ -13,12 +13,9 @@ var last_direction = Vector2.DOWN
 var target_angle : float
 var shoot_right = false
 
-	
-
 func _ready():
-	var powerup_instance = POWERUP_NODE.instantiate()
-	powerup_instance.collected.connect(self.power_up)
-
+	$ShootTimer.wait_time = Globals.fire_rate
+	
 func _physics_process(delta):
 	get_input(delta)
 
@@ -73,15 +70,13 @@ func get_input(delta):
 		rotation = lerp_angle(rotation, target_angle, delta * ROTATION_SPEED) 
 	
 	
-
-
-func _on_timer_timeout():
-	shoot()
-
-
-
-	
-	
 func power_up():
-	speed += 25
+	#speed += 25
+	Globals.fire_rate -= 0.05
+	$ShootTimer.wait_time = Globals.fire_rate
+	print($ShootTimer.wait_time)
 	pass
+
+
+func _on_shoot_timer_timeout():
+	shoot()

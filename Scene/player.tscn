@@ -95,7 +95,7 @@ scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_wy5f3")
 animation = &"down"
 
-[node name="Timer" type="Timer" parent="."]
+[node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.2
 autostart = true
 
@@ -132,5 +132,5 @@ gizmo_extents = 0.0
 [node name="PowerupTimer" type="Timer" parent="."]
 autostart = true
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
 [connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]
