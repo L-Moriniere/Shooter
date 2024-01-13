@@ -80,7 +80,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 motion_mode = 1
 script = ExtResource("1_grmq8")
@@ -95,8 +95,8 @@ scale = Vector2(0.07, 0.07)
 sprite_frames = SubResource("SpriteFrames_wy5f3")
 animation = &"down"
 
-[node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.001
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
 autostart = true
 
 [node name="LeftWing" type="Node2D" parent="."]
@@ -110,27 +110,23 @@ gizmo_extents = 0.0
 
 [node name="ShootingPointLInt" type="Marker2D" parent="LeftWing"]
 unique_name_in_owner = true
-position = Vector2(-8, 8)
+position = Vector2(-1.5, 8)
 scale = Vector2(0.25, 0.25)
 gizmo_extents = 0.0
 
 [node name="RightWing" type="Node2D" parent="."]
 position = Vector2(-15.9, 0)
 
-[node name="ShootingPointRInt" type="Marker2D" parent="RightWing"]
+[node name="ShootingPointRExt" type="Marker2D" parent="RightWing"]
 unique_name_in_owner = true
-position = Vector2(8, 8)
+position = Vector2(1.6, 8)
 scale = Vector2(0.25, 0.25)
 gizmo_extents = 0.0
 
-[node name="ShootingPointRExt" type="Marker2D" parent="RightWing"]
+[node name="ShootingPointRInt" type="Marker2D" parent="RightWing"]
 unique_name_in_owner = true
 position = Vector2(0, 8)
 scale = Vector2(0.25, 0.25)
 gizmo_extents = 0.0
 
-[node name="PowerupTimer" type="Timer" parent="."]
-autostart = true
-
-[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
-[connection signal="timeout" from="PowerupTimer" to="." method="_on_powerup_timer_timeout"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

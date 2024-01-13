@@ -33,21 +33,18 @@ func _on_mob_timer_timeout():
 	# Set the mob's position to a random location.
 	new_mob.position = mob_spawn_location.position
 
-
-
-	# Choose the velocity for the mob.
-
 	# Spawn the mob by adding it to the Main scene.
 	if Globals.mob_count < Globals.mob_per_round:
 		add_child(new_mob)
 		Globals.mob_count += 1
 	
-	if Globals.mob_hit == Globals.mob_per_round:
+	if Globals.mob_hit == Globals.mob_per_round and get_tree().get_nodes_in_group("powerup").size() == 0:
 		Globals.mob_count = 0
 		Globals.mob_hit = 0
 		Globals.round += 1
 		Globals.mob_per_round += randi_range(2,4)
-		print(str(Globals.mob_hit) + " - " + str(Globals.mob_count) + " - " + str(Globals.mob_per_round))
 		get_tree().reload_current_scene()
 	#elif Globals.mob_count == Globals.mob_per_round and 
+	
+	
 	
