@@ -1,6 +1,6 @@
 extends Node2D
 
-const MOB = preload("res://scene/mob.tscn")
+const MOB = preload("res://scene/tiefighter.tscn")
 
 
 

@@ -69,6 +69,24 @@ func get_input(delta):
 		rotation = lerp_angle(rotation, target_angle, delta * ROTATION_SPEED) 
 	
 	
+<<<<<<< Updated upstream
+=======
+func power_up():
+	var array = [1,2,3]
+	var item = array[randi() % array.size()] 
+	match item:
+		1:
+			speed +=25
+		2:
+			if Globals.fire_rate > 0.001 :
+				Globals.fire_rate -= 0.05
+			elif Globals.fire_rate == 0.05:
+				Globals.fire_rate == 0.001
+			$ShootTimer.wait_time = Globals.fire_rate
+		3: 
+			if Globals.number_weapon <4:
+				Globals.number_weapon += 1
+>>>>>>> Stashed changes
 
 
 func _on_timer_timeout():
