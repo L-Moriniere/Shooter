@@ -23,7 +23,7 @@ func take_damage():
 		var e = explosion.instantiate()
 		add_child(e)
 		e.play("default")
-		$explode.start()
+		$Explode.start()
 		drop_item()
 		
 
@@ -33,7 +33,7 @@ func _on_explode_timeout():
 
 func drop_item():
 	var random_number = randf()
-	var proba = 0.3
+	var proba = 0.2
 	if random_number < proba:
 		var powerup_instance = POWERUP_NODE.instantiate()
 		powerup_instance.position = position

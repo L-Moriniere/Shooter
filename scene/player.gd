@@ -35,42 +35,40 @@ func shoot():
 	
 	match (Globals.number_weapon):
 		1:
-			var new_laser = LASER.instantiate()
 			var weapon = %ShootingPointLExt
-			
 			if shoot_right == false:
 				weapon = %ShootingPointRExt
 				shoot_right = true
 			else:
 				shoot_right = false
 	
-			spawnLaser(weapon, 1)
+			spawnLaser(weapon)
 		2:
 			var weapon1 = %ShootingPointLExt
 			var weapon2 = %ShootingPointRExt
-			spawnLaser(weapon1, 1)
-			spawnLaser(weapon2, 2)
+			spawnLaser(weapon1)
+			spawnLaser(weapon2)
 			
 		3:
 			var weapon1 = %ShootingPointLExt
 			var weapon2 = %ShootingPointRExt
 			var weapon3 = %ShootingPointLInt
-			spawnLaser(weapon1, 1)
-			spawnLaser(weapon2, 2)
-			spawnLaser(weapon3, 3)
+			spawnLaser(weapon1)
+			spawnLaser(weapon2)
+			spawnLaser(weapon3)
 		4:
 			var weapon1 = %ShootingPointLExt
 			var weapon2 = %ShootingPointRExt
 			var weapon3 = %ShootingPointLInt
 			var weapon4 = %ShootingPointRInt
-			spawnLaser(weapon1, 1)
-			spawnLaser(weapon2, 2)
-			spawnLaser(weapon3, 3)
-			spawnLaser(weapon4, 4)
+			spawnLaser(weapon1)
+			spawnLaser(weapon2)
+			spawnLaser(weapon3)
+			spawnLaser(weapon4)
 
 		
 
-func spawnLaser(weapon, laser_number):
+func spawnLaser(weapon):
 	var new_laser = LASER.instantiate()
 	var starting_position = weapon.global_position
 	var dir = last_direction.normalized()
