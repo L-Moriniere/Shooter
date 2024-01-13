@@ -58,4 +58,4 @@ func drop_item():
 
 func _on_shoot_timer_timeout():
 	shoot()
-	print("ojk")
+
