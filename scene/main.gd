@@ -1,12 +1,13 @@
 extends Node2D
 
-const MOB = preload("res://scene/tiefighter.tscn")
+const TieFighter = preload("res://scene/tie_fighter.tscn")
+const TieInterceptor = preload("res://scene/tie_interceptor.tscn")
 
-
+var spawnable = [TieFighter, TieInterceptor]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	randomize()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -22,7 +23,7 @@ func _on_player_shoot(Laser, direction, location):
 
 
 func _on_mob_timer_timeout():
-	var new_mob = MOB.instantiate()
+	var spawn = spawnable[randi()%spawnable.size()].instantiate()
 	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
 	mob_spawn_location.progress_ratio = randf()
 	
@@ -31,11 +32,11 @@ func _on_mob_timer_timeout():
 	var direction = mob_spawn_location.rotation + PI / 2
 
 	# Set the mob's position to a random location.
-	new_mob.position = mob_spawn_location.position
+	spawn.position = mob_spawn_location.position
 
 	# Spawn the mob by adding it to the Main scene.
 	if Globals.mob_count < Globals.mob_per_round:
-		add_child(new_mob)
+		add_child(spawn)
 		Globals.mob_count += 1
 	
 	if Globals.mob_hit == Globals.mob_per_round and get_tree().get_nodes_in_group("powerup").size() == 0:

@@ -1,0 +1,37 @@
+[gd_scene load_steps=4 format=3 uid="uid://djv1w8nwfgxuc"]
+
+[ext_resource type="Script" path="res://scene/tie_interceptor.gd" id="1_aj8m6"]
+[ext_resource type="Texture2D" uid="uid://tyieysmloccy" path="res://assets/tieinterceptor.png" id="1_mbks4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6a6c"]
+size = Vector2(40, 45)
+
+[node name="TieInterceptor" type="CharacterBody2D" groups=["mobs"]]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_aj8m6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.57079
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_mbks4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(6, 0)
+shape = SubResource("RectangleShape2D_j6a6c")
+
+[node name="Explode" type="Timer" parent="."]
+wait_time = 0.15
+
+[node name="Weapon" type="Node2D" parent="."]
+
+[node name="ShootingPoint" type="Marker2D" parent="Weapon"]
+unique_name_in_owner = true
+position = Vector2(15, 0)
+
+[node name="ShootTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Explode" to="." method="_on_explode_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

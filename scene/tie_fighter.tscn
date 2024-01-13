@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b7hjgt1bk3mqn"]
 
-[ext_resource type="Script" path="res://scene/tiefighter.gd" id="1_u7quc"]
-[ext_resource type="Texture2D" uid="uid://dcwwypqjripuo" path="res://assets/tiefighter.png" id="2_m1v5e"]
+[ext_resource type="Script" path="res://scene/tie_fighter.gd" id="1_74khc"]
+[ext_resource type="Texture2D" uid="uid://dcwwypqjripuo" path="res://assets/tiefighter.png" id="2_pof3o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7cj6i"]
 size = Vector2(32, 33)
@@ -9,16 +9,16 @@ size = Vector2(32, 33)
 [node name="TieFighter" type="CharacterBody2D" groups=["mobs"]]
 collision_layer = 2
 collision_mask = 0
-script = ExtResource("1_u7quc")
+script = ExtResource("1_74khc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_7cj6i")
 
 [node name="Tiefighter" type="Sprite2D" parent="."]
 scale = Vector2(0.08, 0.08)
-texture = ExtResource("2_m1v5e")
+texture = ExtResource("2_pof3o")
 
-[node name="explode" type="Timer" parent="."]
+[node name="Explode" type="Timer" parent="."]
 wait_time = 0.15
 
-[connection signal="timeout" from="explode" to="." method="_on_explode_timeout"]
+[connection signal="timeout" from="Explode" to="." method="_on_explode_timeout"]
