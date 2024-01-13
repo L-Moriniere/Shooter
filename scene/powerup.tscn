@@ -5,7 +5,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v17j3"]
 
-[node name="Powerup" type="Area2D"]
+[node name="Powerup" type="Area2D" groups=["powerup"]]
 top_level = true
 collision_layer = 0
 script = ExtResource("1_05w2b")

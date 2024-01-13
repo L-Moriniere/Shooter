@@ -38,7 +38,7 @@ func _on_mob_timer_timeout():
 		add_child(new_mob)
 		Globals.mob_count += 1
 	
-	if Globals.mob_hit == Globals.mob_per_round:
+	if Globals.mob_hit == Globals.mob_per_round and get_tree().get_nodes_in_group("powerup").size() == 0:
 		Globals.mob_count = 0
 		Globals.mob_hit = 0
 		Globals.round += 1

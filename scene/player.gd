@@ -32,22 +32,51 @@ func _physics_process(delta):
 
 
 func shoot():
+	
+	match (Globals.number_weapon):
+		1:
+			var new_laser = LASER.instantiate()
+			var weapon = %ShootingPointLExt
+			
+			if shoot_right == false:
+				weapon = %ShootingPointRExt
+				shoot_right = true
+			else:
+				shoot_right = false
+	
+			spawnLaser(weapon, 1)
+		2:
+			var weapon1 = %ShootingPointLExt
+			var weapon2 = %ShootingPointRExt
+			spawnLaser(weapon1, 1)
+			spawnLaser(weapon2, 2)
+			
+		3:
+			var weapon1 = %ShootingPointLExt
+			var weapon2 = %ShootingPointRExt
+			var weapon3 = %ShootingPointLInt
+			spawnLaser(weapon1, 1)
+			spawnLaser(weapon2, 2)
+			spawnLaser(weapon3, 3)
+		4:
+			var weapon1 = %ShootingPointLExt
+			var weapon2 = %ShootingPointRExt
+			var weapon3 = %ShootingPointLInt
+			var weapon4 = %ShootingPointRInt
+			spawnLaser(weapon1, 1)
+			spawnLaser(weapon2, 2)
+			spawnLaser(weapon3, 3)
+			spawnLaser(weapon4, 4)
+
+		
+
+func spawnLaser(weapon, laser_number):
 	var new_laser = LASER.instantiate()
-	var weapon = %ShootingPointLExt
-	
-	if shoot_right == false:
-		weapon = %ShootingPointRExt
-		shoot_right = true
-	else:
-		shoot_right = false
-	
 	var starting_position = weapon.global_position
-	
 	var dir = last_direction.normalized()
 	var _rotation = rad_to_deg(atan2(dir.y, dir.x))
 	new_laser.start(starting_position, last_direction, _rotation)
 	weapon.add_child(new_laser)
-
 
 
 func get_input(delta):
@@ -72,10 +101,16 @@ func get_input(delta):
 	
 func power_up():
 	#speed += 25
-	Globals.fire_rate -= 0.05
-	$ShootTimer.wait_time = Globals.fire_rate
-	print($ShootTimer.wait_time)
-	pass
+	#if Globals.fire_rate > 0.001 :
+		#Globals.fire_rate -= 0.05
+	#elif Globals.fire_rate == 0.05:
+		#Globals.fire_rate == 0.001
+	#$ShootTimer.wait_time = Globals.fire_rate
+	#print($ShootTimer.wait_time)
+	if Globals.number_weapon <4:
+		Globals.number_weapon += 1
+	print(Globals.number_weapon)
+
 
 
 func _on_shoot_timer_timeout():
