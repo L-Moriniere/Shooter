@@ -13,31 +13,11 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Globals.mob_hit == Globals.mob_per_round and get_tree().get_nodes_in_group("powerup").size() == 0 and Globals.round_count != Globals.round_boss:
-		$MobTimer.stop()
-		$RoundTimer.start()
-		Globals.mob_count = 0
-		Globals.mob_hit = 0
-		Globals.round_count += 1
-		Globals.mob_per_round += randi_range(2,4)
-		
-		
-	elif Globals.round_count == Globals.round_boss and !Globals.is_boss_defeated:
-		$MobTimer.stop()
-		$RoundTimer.start()
-
-		if !get_node("star_destroyer"):
-			var destroyer = StarDestroyer.instantiate()
-			destroyer.position = $DestroyerStartPosition.global_position
-			destroyer.rotation_degrees = -90
-			add_child(destroyer)
-			print($DestroyerStartPosition.global_position, $DestroyerEndPosition.global_position)
-			
-
+	pass
 
 func _on_player_shoot(Laser, direction, location):
 	var spawned_laser = Laser.instantiate()
-	add_child(spawned_laser)
+	add_child(spawned_laser)	
 	spawned_laser.rotation = direction
 	spawned_laser.position = location
 	spawned_laser.velocity = spawned_laser.velocity.rotated(direction)
@@ -55,18 +35,7 @@ func _on_mob_timer_timeout():
 	# Set the mob's position to a random location.
 	spawn.position = mob_spawn_location.position
 
-	# Spawn the mob by adding it to the Main scene.
-	if Globals.mob_count < Globals.mob_per_round:
-		add_child(spawn)
-		Globals.mob_count += 1
-	
-	
-	
-	#elif Globals.mob_count == Globals.mob_per_round and 
-	
-	
-	
 
-
-func _on_round_timer_timeout():
-	$MobTimer.start()
+	
+	
+	

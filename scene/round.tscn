@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3i2ojwa4gyij"]
+
+[ext_resource type="Script" path="res://scene/round.gd" id="1_5i42n"]
+
+[sub_resource type="Curve2D" id="Curve2D_jopux"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1001, 3, 0, 0, 0, 0, 1001, 1001, 0, 0, 0, 0, -1, 1000, 0, 0, 0, 0, 1, 0)
+}
+point_count = 6
+
+[node name="Round" type="Node2D"]
+script = ExtResource("1_5i42n")
+
+[node name="MobPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_jopux")
+
+[node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
+position = Vector2(0.820709, -0.000537872)
+
+[node name="RoundTimer" type="Timer" parent="."]
+wait_time = 15.0
+autostart = true
+
+[node name="MobTimer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

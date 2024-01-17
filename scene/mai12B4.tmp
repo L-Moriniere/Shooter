@@ -28,17 +28,18 @@ curve = SubResource("Curve2D_4whqr")
 position = Vector2(0.820709, -0.000537872)
 
 [node name="RoundTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="MobTimer" type="Timer" parent="."]
 
-[node name="DestroyerStartPosition" type="Node2D" parent="."]
+[node name="DestroyerStartPosition" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(500, 0)
 
-[node name="DestroyerEndPosition" type="Node2D" parent="."]
+[node name="DestroyerEndPosition" type="Marker2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(500, 252)
+position = Vector2(500, 281)
 
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]

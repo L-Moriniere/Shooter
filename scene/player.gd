@@ -114,7 +114,5 @@ func power_up():
 				Globals.number_weapon += 1
 
 
-
-
 func _on_shoot_timer_timeout():
 	shoot()

@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckhv5jw6d6nst"]
+
+[ext_resource type="Texture2D" uid="uid://b3s67lefw0g5p" path="res://assets/stardestroyer.png" id="1_60mj8"]
+[ext_resource type="Script" path="res://scene/star_destroyer.gd" id="1_tqyrp"]
+
+[node name="star_destroyer" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_tqyrp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_60mj8")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+build_mode = 1
+polygon = PackedVector2Array(-218, 0, 199, -127, 201, 131)
+
+[node name="Spawn1" type="Node2D" parent="."]
+position = Vector2(-62, -34)
+
+[node name="SpawnTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Spawn2" type="Node2D" parent="."]
+position = Vector2(-60, 34)
+
+[node name="Explode" type="Timer" parent="."]
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="Explode" to="." method="_on_explode_timeout"]

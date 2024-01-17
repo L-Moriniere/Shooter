@@ -15,6 +15,7 @@ script = ExtResource("1_74khc")
 shape = SubResource("RectangleShape2D_7cj6i")
 
 [node name="Tiefighter" type="Sprite2D" parent="."]
+rotation = 1.57079
 scale = Vector2(0.08, 0.08)
 texture = ExtResource("2_pof3o")
 

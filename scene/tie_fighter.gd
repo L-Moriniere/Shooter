@@ -12,6 +12,7 @@ var health = 1
 
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
+	rotation = position.angle_to_point(player.global_position)
 	velocity = direction * speed 
 	move_and_slide()
 
@@ -24,19 +25,10 @@ func take_damage():
 		add_child(e)
 		e.play("default")
 		$Explode.start()
-		drop_item()
 		
 
 
 func _on_explode_timeout():
 	queue_free()
 
-func drop_item():
-	var random_number = randf()
-	var proba = 0.2
-	if random_number < proba:
-		var powerup_instance = POWERUP_NODE.instantiate()
-		powerup_instance.position = position
-		get_parent().add_child(powerup_instance)
-		powerup_instance.collected.connect(get_node("../Player").power_up)
 

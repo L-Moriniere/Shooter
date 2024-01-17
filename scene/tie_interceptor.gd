@@ -9,7 +9,7 @@ const explosion = preload("res://scene/explosion.tscn")
 @onready var LaserMob = preload("res://scene/laser_mobs.tscn")
 
 
-var health = 5
+var health = 2
 
 
 func _physics_process(delta):
@@ -52,7 +52,7 @@ func drop_item():
 		var powerup_instance = POWERUP_NODE.instantiate()
 		powerup_instance.position = position
 		get_parent().add_child(powerup_instance)
-		powerup_instance.collected.connect(get_node("../Player").power_up)
+		powerup_instance.collected.connect(get_node("/root/Main/Player").power_up)
 
 
 
