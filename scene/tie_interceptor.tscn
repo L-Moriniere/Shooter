@@ -20,7 +20,7 @@ texture = ExtResource("1_mbks4")
 position = Vector2(6, 0)
 shape = SubResource("RectangleShape2D_j6a6c")
 
-[node name="Explode" type="Timer" parent="."]
+[node name="Explode" type="Timer" parent="." groups=["mobs"]]
 wait_time = 0.15
 
 [node name="Weapon" type="Node2D" parent="."]

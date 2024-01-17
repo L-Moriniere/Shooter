@@ -1,0 +1,53 @@
+[gd_scene load_steps=2 format=3 uid="uid://cedun5fmqf6yu"]
+
+[ext_resource type="Script" path="res://scene/hud.gd" id="1_rsato"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_rsato")
+
+[node name="RoundLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -225.0
+offset_right = -33.9996
+offset_bottom = 58.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 42
+text = "Round : 1"
+
+[node name="MobKilled" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Message" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -251.5
+offset_top = 300.0
+offset_right = 251.5
+offset_bottom = 410.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 80
+text = "Star Shooter "
+
+[node name="StartButton" type="Button" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -350.0
+offset_right = 100.0
+offset_bottom = -250.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 50
+text = "START"
+
+[node name="MessageTimer" type="Timer" parent="."]
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

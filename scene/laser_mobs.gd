@@ -1,5 +1,6 @@
 extends Area2D
 
+signal hit
 @export var speed = 500
 var velocity = Vector2.DOWN
 
@@ -17,6 +18,7 @@ func start(_position, _direction, _rotation):
 func _on_body_entered(body):
 	if body.is_in_group("player"):
 		body.hide()
+		get_node("/root/Main/Player").hit.emit()
 		queue_free()
 
 
