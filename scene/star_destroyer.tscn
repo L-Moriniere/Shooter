@@ -26,7 +26,7 @@ autostart = true
 [node name="Spawn2" type="Node2D" parent="."]
 position = Vector2(-60, 34)
 
-[node name="Explode" type="Timer" parent="."]
+[node name="Explode" type="Timer" parent="." groups=["mobs"]]
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Explode" to="." method="_on_explode_timeout"]

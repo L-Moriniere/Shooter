@@ -19,6 +19,7 @@ func _process(delta):
 		Globals.mob_count = 0
 		Globals.mob_hit = 0
 		Globals.round_count += 1
+		get_node("HUD/RoundLabel").text = "Round : %s" % Globals.round_count
 		Globals.mob_per_round += randi_range(2,4)
 		
 		
@@ -31,7 +32,6 @@ func _process(delta):
 			destroyer.position = $DestroyerStartPosition.global_position
 			destroyer.rotation_degrees = -90
 			add_child(destroyer)
-			print($DestroyerStartPosition.global_position, $DestroyerEndPosition.global_position)
 			
 
 
@@ -60,13 +60,27 @@ func _on_mob_timer_timeout():
 		add_child(spawn)
 		Globals.mob_count += 1
 	
-	
-	
-	#elif Globals.mob_count == Globals.mob_per_round and 
-	
-	
-	
 
+	
+func new_game():
+	$Player.show()
+	$StartTimer.start()
+	$HUD.show_message("Get Ready")
+	$HUD.reset_score()
+
+func game_over():
+	$HUD.show_game_over()
+	$RoundTimer.stop()
+	$MobTimer.stop()
+	await get_tree().create_timer(1.0).timeout
+	for enemy in get_tree().get_nodes_in_group("mobs"):
+		enemy.queue_free()
 
 func _on_round_timer_timeout():
 	$MobTimer.start()
+	
+
+
+func _on_start_timer_timeout():
+	$RoundTimer.start()
+

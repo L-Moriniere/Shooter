@@ -27,8 +27,9 @@ func _physics_process(delta):
 
 		if collider.is_in_group("mobs"):
 			hide()
-			$CollisionShape2D.set_deferred("disabled", true)
-			#ajout game over ou baisse de vie
+			hit.emit()
+
+
 
 
 func shoot():

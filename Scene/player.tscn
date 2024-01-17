@@ -96,7 +96,7 @@ sprite_frames = SubResource("SpriteFrames_wy5f3")
 animation = &"down"
 
 [node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.001
+wait_time = 0.3
 autostart = true
 
 [node name="LeftWing" type="Node2D" parent="."]
