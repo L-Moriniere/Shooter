@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var speed = randi_range(50,150)
+@export var speed = randi_range(60,160)
 const explosion = preload("res://scene/explosion.tscn") 
 
 @onready var player = get_node("/root/Main/Player")
@@ -24,11 +24,14 @@ func take_damage():
 	health -= 1
 	if health == 0:
 		Globals.mob_hit += 1
+		Globals.score += 1
+		get_node("/root/Main/HUD").update_score()
 		var e = explosion.instantiate()
 		add_child(e)
 		e.play("default")
 		$Explode.start()
 		drop_item()
+		
 		
 func shoot():
 	spawnLaser(%ShootingPoint)

@@ -104,15 +104,21 @@ func power_up():
 	match item:
 		1:
 			speed +=25
+			Globals.label_speed += 25
+			get_node('/root/Main/HUD').update_speed_label()
 		2:
 			if Globals.fire_rate > 0.001 :
 				Globals.fire_rate -= 0.05
 			elif Globals.fire_rate == 0.05:
 				Globals.fire_rate == 0.001
 			$ShootTimer.wait_time = Globals.fire_rate
+			Globals.label_fire_rate += 5
+			get_node('/root/Main/HUD').update_speed_fire_rate_label()
 		3: 
 			if Globals.number_weapon <4:
 				Globals.number_weapon += 1
+				get_node('/root/Main/HUD').update_weapon_label()
+			
 
 
 func _on_shoot_timer_timeout():
