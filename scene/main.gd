@@ -13,7 +13,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Globals.mob_hit == Globals.mob_per_round and get_tree().get_nodes_in_group("powerup").size() == 0 and Globals.round_count != Globals.round_boss:
+	if Globals.mob_hit == Globals.mob_per_round and get_tree().get_nodes_in_group("powerup").size() == 0 and Globals.round_count != Globals.round_boss_spawn:
 		$MobTimer.stop()
 		$RoundTimer.start()
 		Globals.mob_count = 0
@@ -21,17 +21,22 @@ func _process(delta):
 		Globals.round_count += 1
 		get_node("HUD/RoundLabel").text = "Round : %s" % Globals.round_count
 		Globals.mob_per_round += randi_range(2,4)
+		if Globals.round_count >= Globals.round_boss_spawn:
+			increase_speed_mobs()
 		
 		
-	elif Globals.round_count == Globals.round_boss and !Globals.is_boss_defeated:
-		$MobTimer.stop()
+	elif Globals.round_count == Globals.round_boss_spawn and !Globals.is_boss_defeated:
 		$RoundTimer.start()
-
 		if !get_node("star_destroyer"):
 			var destroyer = StarDestroyer.instantiate()
 			destroyer.position = $DestroyerStartPosition.global_position
 			destroyer.rotation_degrees = -90
 			add_child(destroyer)
+			$MobTimer.wait_time = 2.0
+			await get_tree().create_timer(1.0).timeout
+			$MobTimer.start()
+			
+		
 			
 
 
@@ -44,21 +49,22 @@ func _on_player_shoot(Laser, direction, location):
 
 
 func _on_mob_timer_timeout():
-	var spawn = spawnable[randi()%spawnable.size()].instantiate()
-	var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
-	mob_spawn_location.progress_ratio = randf()
-	
-	
-	# Set the mob's direction perpendicular to the path direction.
-	var direction = mob_spawn_location.rotation + PI / 2
+	if !Globals.is_game_over:
+		var spawn = spawnable[randi()%spawnable.size()].instantiate()
+		var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
+		mob_spawn_location.progress_ratio = randf()
+		
+		
+		# Set the mob's direction perpendicular to the path direction.
+		var direction = mob_spawn_location.rotation + PI / 2
 
-	# Set the mob's position to a random location.
-	spawn.position = mob_spawn_location.position
+		# Set the mob's position to a random location.
+		spawn.position = mob_spawn_location.position
 
-	# Spawn the mob by adding it to the Main scene.
-	if Globals.mob_count < Globals.mob_per_round:
-		add_child(spawn)
-		Globals.mob_count += 1
+		# Spawn the mob by adding it to the Main scene.
+		if Globals.mob_count < Globals.mob_per_round:
+			add_child(spawn)
+			Globals.mob_count += 1
 	
 
 	
@@ -67,18 +73,26 @@ func new_game():
 	$StartTimer.start()
 	$HUD.show_message("Get Ready")
 	$HUD.reset_score()
+	Globals.is_game_over = false
 
 func game_over():
 	$HUD.show_game_over()
 	$RoundTimer.stop()
-	$MobTimer.stop()
+	Globals.is_game_over = true
 	await get_tree().create_timer(1.0).timeout
 	for enemy in get_tree().get_nodes_in_group("mobs"):
 		enemy.queue_free()
+	for powerup in get_tree().get_nodes_in_group("powerup"):
+		powerup.queue_free()
 
 func _on_round_timer_timeout():
 	$MobTimer.start()
+
 	
+func increase_speed_mobs():
+	Globals.speed_tie_fighter = Globals.speed_tie_fighter + 25
+	Globals.speed_tie_interceptor = Globals.speed_tie_interceptor + 20
+	Globals.fire_rate_tie = Globals.fire_rate_tie - 0.25
 
 
 func _on_start_timer_timeout():

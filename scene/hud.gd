@@ -20,6 +20,7 @@ func show_message(text):
 
 func reset_score():
 	$RoundLabel.text = "Score : 1"
+	$MobKilled.text = "Ships destroyed : 0"
 
 func show_game_over():
 	show_message("Game Over")
@@ -30,6 +31,18 @@ func show_game_over():
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
 	
+func update_score():
+	$MobKilled.text = "Ships destroyed : %s" % Globals.score
+	
+	
+func update_weapon_label():
+	$WeaponLabel.text = "Weapon %s" % Globals.number_weapon 
+	
+func update_speed_label():
+	$SpeedLabel.text = "Speed +" + str(Globals.label_speed) +"%"
+	
+func update_speed_fire_rate_label():
+	$FireRateLabel.text = "Fire rate +" + str(Globals.label_fire_rate) +"%"
 	
 	
 func reset_count():
@@ -41,7 +54,15 @@ func reset_count():
 	Globals.fire_rate = 0.3
 	Globals.number_weapon = 1
 	Globals.is_boss_defeated = false
-
+	Globals.round_boss_base = 4
+	Globals.speed_tie_fighter = 100
+	Globals.speed_tie_interceptor = 50
+	Globals.fire_rate_tie = 3
+	$WeaponLabel.text = "Weapon 1"
+	$SpeedLabel.text = "Speed +0%"
+	$FireRateLabel.text = "Fire rate +0%"
+	
+	
 func _on_message_timer_timeout():
 	$Message.hide()
 

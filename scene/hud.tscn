@@ -17,8 +17,14 @@ theme_override_font_sizes/font_size = 42
 text = "Round : 1"
 
 [node name="MobKilled" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 25.0
+offset_top = 10.0
+offset_right = 277.0
+offset_bottom = 49.0
+theme_override_font_sizes/font_size = 28
+text = "Ships destroyed : 0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Message" type="Label" parent="."]
 anchors_preset = 5
@@ -48,6 +54,31 @@ theme_override_font_sizes/font_size = 50
 text = "START"
 
 [node name="MessageTimer" type="Timer" parent="."]
+
+[node name="SpeedLabel" type="Label" parent="."]
+offset_left = 860.0
+offset_top = 900.0
+offset_right = 954.0
+offset_bottom = 926.0
+theme_override_font_sizes/font_size = 18
+text = "Speed +0%"
+
+[node name="WeaponLabel" type="Label" parent="."]
+offset_left = 860.0
+offset_top = 928.0
+offset_right = 947.0
+offset_bottom = 954.0
+theme_override_font_sizes/font_size = 18
+text = "Weapon 1"
+horizontal_alignment = 1
+
+[node name="FireRateLabel" type="Label" parent="."]
+offset_left = 860.0
+offset_top = 956.0
+offset_right = 974.0
+offset_bottom = 982.0
+theme_override_font_sizes/font_size = 18
+text = "Fire rate +0%"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

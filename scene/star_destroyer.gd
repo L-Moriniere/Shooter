@@ -37,8 +37,11 @@ func _on_spawn_timer_timeout():
 func take_damage():
 	health -= 1
 	if health == 0:
+		Globals.round_boss_base = Globals.round_boss_base + randi_range(2,4)
 		Globals.is_boss_defeated = true
 		Globals.round_count += 1
+		Globals.score += 10
+		get_node("/root/Main/HUD").update_score()
 		var e = explosion.instantiate()
 		e.scale.x = 10
 		e.scale.y = 10

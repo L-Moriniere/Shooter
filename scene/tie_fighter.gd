@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = randi_range(100,200)
+@export var speed = randi_range(120,220)
 const explosion = preload("res://scene/explosion.tscn") 
 
 
@@ -21,11 +21,24 @@ func take_damage():
 	health -= 1
 	if health == 0:
 		Globals.mob_hit += 1
+		Globals.score += 1
+		get_node("/root/Main/HUD").update_score()
 		var e = explosion.instantiate()
 		add_child(e)
 		e.play("default")
 		$Explode.start()
-		
+		drop_item()
+
+
+func drop_item():
+	var random_number = randf()
+	var proba = 0.3
+	if random_number < proba:
+		var powerup_instance = POWERUP_NODE.instantiate()
+		powerup_instance.position = position
+		get_parent().add_child(powerup_instance)
+		powerup_instance.collected.connect(get_node("/root/Main/Player").power_up)
+
 
 
 func _on_explode_timeout():
