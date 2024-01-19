@@ -7,25 +7,18 @@
 size = Vector2(40, 29)
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0623k"]
-load_path = "res://.godot/imported/sprite_dl.png-f3c7ee7ae91833d50015c5f7120ba758.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2t58x"]
-load_path = "res://.godot/imported/sprite_dr.png-aa4f7ebc4c3d5715e7bcbbd494f21d7d.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_8w60i"]
-load_path = "res://.godot/imported/sprite_l.png-6677f372563121fbf4c59eb51cfe8567.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ixk2d"]
-load_path = "res://.godot/imported/sprite_r.png-2ce9344de1ecdd53dfccb1a07b48bb98.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_gurrs"]
-load_path = "res://.godot/imported/sprite_u.png-ab6398abf94eacdeb53806ced5e09a3a.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_l7l8n"]
-load_path = "res://.godot/imported/sprite_ul.png-862f20a12f3f34ca98aa16096bb2a7ba.ctex"
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ygorg"]
-load_path = "res://.godot/imported/sprite_ur.png-b5ddcf7b4d951650bfcc30f1abfb345b.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wy5f3"]
 animations = [{
