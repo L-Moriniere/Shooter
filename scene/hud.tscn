@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cedun5fmqf6yu"]
+[gd_scene load_steps=3 format=3 uid="uid://cedun5fmqf6yu"]
 
 [ext_resource type="Script" path="res://scene/hud.gd" id="1_rsato"]
+[ext_resource type="Theme" uid="uid://druyx7nv3o8nr" path="res://assets/theme.tres" id="2_ltx5o"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_rsato")
@@ -9,34 +10,52 @@ script = ExtResource("1_rsato")
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -225.0
-offset_right = -33.9996
-offset_bottom = 58.0
+offset_left = -207.0
+offset_top = 20.0
+offset_right = -38.0
+offset_bottom = 44.0
 grow_horizontal = 0
-theme_override_font_sizes/font_size = 42
+theme = ExtResource("2_ltx5o")
+theme_override_colors/font_color = Color(0.92549, 0.811765, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.160784, 0.619608, 1)
+theme_override_font_sizes/font_size = 20
 text = "Round : 1"
 
 [node name="MobKilled" type="Label" parent="."]
-offset_left = 25.0
-offset_top = 10.0
-offset_right = 277.0
-offset_bottom = 49.0
-theme_override_font_sizes/font_size = 28
+offset_left = 31.0
+offset_top = 20.0
+offset_right = 381.0
+offset_bottom = 44.0
+theme = ExtResource("2_ltx5o")
+theme_override_colors/font_color = Color(0.92549, 0.811765, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.160784, 0.619608, 1)
+theme_override_font_sizes/font_size = 20
 text = "Ships destroyed : 0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Message" type="Label" parent="."]
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -251.5
-offset_top = 300.0
-offset_right = 251.5
-offset_bottom = 410.0
+anchor_bottom = 0.5
+offset_left = -460.0
+offset_top = -200.0
+offset_right = 460.0
+offset_bottom = -90.0
 grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_ltx5o")
+theme_override_colors/font_color = Color(0.92549, 0.811765, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.160784, 0.619608, 1)
 theme_override_font_sizes/font_size = 80
-text = "Star Shooter "
+text = "Star Shooter"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StartButton" type="Button" parent="."]
 anchors_preset = 7
@@ -44,40 +63,53 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -100.0
-offset_top = -350.0
-offset_right = 100.0
-offset_bottom = -250.0
+offset_left = -134.0
+offset_top = -450.0
+offset_right = 134.0
+offset_bottom = -350.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_font_sizes/font_size = 50
+theme = ExtResource("2_ltx5o")
+theme_override_font_sizes/font_size = 42
 text = "START"
 
 [node name="MessageTimer" type="Timer" parent="."]
 
 [node name="SpeedLabel" type="Label" parent="."]
-offset_left = 860.0
-offset_top = 900.0
-offset_right = 954.0
-offset_bottom = 926.0
-theme_override_font_sizes/font_size = 18
+offset_left = 780.0
+offset_top = 902.0
+offset_right = 917.0
+offset_bottom = 919.0
+theme = ExtResource("2_ltx5o")
+theme_override_colors/font_color = Color(0.92549, 0.811765, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.160784, 0.619608, 1)
+theme_override_font_sizes/font_size = 16
 text = "Speed +0%"
 
 [node name="WeaponLabel" type="Label" parent="."]
-offset_left = 860.0
-offset_top = 928.0
-offset_right = 947.0
-offset_bottom = 954.0
-theme_override_font_sizes/font_size = 18
+offset_left = 780.0
+offset_top = 927.0
+offset_right = 904.0
+offset_bottom = 943.0
+theme = ExtResource("2_ltx5o")
+theme_override_colors/font_color = Color(0.92549, 0.811765, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.160784, 0.619608, 1)
+theme_override_font_sizes/font_size = 16
 text = "Weapon 1"
 horizontal_alignment = 1
 
 [node name="FireRateLabel" type="Label" parent="."]
-offset_left = 860.0
-offset_top = 956.0
+offset_left = 782.0
+offset_top = 953.0
 offset_right = 974.0
-offset_bottom = 982.0
-theme_override_font_sizes/font_size = 18
+offset_bottom = 969.0
+theme = ExtResource("2_ltx5o")
+theme_override_colors/font_color = Color(0.92549, 0.811765, 0, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0.160784, 0.619608, 1)
+theme_override_font_sizes/font_size = 16
 text = "Fire rate +0%"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]

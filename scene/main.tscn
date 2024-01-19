@@ -31,7 +31,7 @@ script = ExtResource("1_1w23u")
 [node name="ColorRect2" type="ColorRect" parent="."]
 offset_right = 1000.0
 offset_bottom = 1000.0
-color = Color(0, 0.0313726, 0.25098, 1)
+color = Color(0, 0.0608107, 0.429243, 1)
 
 [node name="ColorRect" type="ColorRect" parent="ColorRect2"]
 material = SubResource("ShaderMaterial_d7r7g")
@@ -42,7 +42,6 @@ offset_top = -3.0
 offset_bottom = 997.0
 grow_horizontal = 2
 size_flags_vertical = 4
-color = Color(0, 0, 0.168627, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_xfttf")]
 position = Vector2(500, 460)

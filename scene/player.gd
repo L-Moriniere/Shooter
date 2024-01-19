@@ -101,6 +101,7 @@ func get_input(delta):
 func power_up():
 	var array = [1,2,3]
 	var item = array[randi() % array.size()] 
+	item = 3
 	match item:
 		1:
 			speed +=25

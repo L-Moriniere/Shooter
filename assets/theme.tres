@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=10 format=3 uid="uid://druyx7nv3o8nr"]
+
+[ext_resource type="FontFile" uid="uid://dw7ghy6xuvd6y" path="res://assets/AtariFontFullVersion-ZJ23.ttf" id="1_vf04r"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_0x8dd"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oo1ux"]
+texture = SubResource("CanvasTexture_0x8dd")
+modulate_color = Color(0.539863, 8.66354e-07, 1.92523e-07, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_j4ddw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_25gvu"]
+texture = SubResource("CanvasTexture_j4ddw")
+modulate_color = Color(0.541176, 0, 0, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_1wmat"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7pnk7"]
+texture = SubResource("CanvasTexture_1wmat")
+modulate_color = Color(0.631373, 0, 0, 1)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_tyome"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_wocrj"]
+texture = SubResource("CanvasTexture_tyome")
+modulate_color = Color(0.364706, 0, 0, 1)
+
+[resource]
+default_font = ExtResource("1_vf04r")
+Button/colors/font_pressed_color = Color(0.54902, 0.54902, 0.54902, 1)
+Button/styles/focus = SubResource("StyleBoxTexture_oo1ux")
+Button/styles/hover = SubResource("StyleBoxTexture_25gvu")
+Button/styles/normal = SubResource("StyleBoxTexture_7pnk7")
+Button/styles/pressed = SubResource("StyleBoxTexture_wocrj")
