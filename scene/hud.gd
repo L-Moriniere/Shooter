@@ -53,7 +53,7 @@ func reset_count():
 	Globals.mob_hit = 0
 	Globals.lvl_power = 1
 	Globals.player_speed = 400
-	Globals.fire_rate = 0.3
+	Globals.health = 2
 	Globals.number_weapon = 1
 	Globals.is_boss_defeated = false
 	Globals.round_boss_base = 4

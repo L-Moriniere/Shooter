@@ -19,6 +19,7 @@ func _ready():
 	$ShootTimer.wait_time = Globals.fire_rate
 	
 func _physics_process(delta):
+	print(Globals.health)
 	get_input(delta)
 
 	move_and_slide()
@@ -28,8 +29,7 @@ func _physics_process(delta):
 		var collider = collision.get_collider()
 
 		if collider.is_in_group("mobs"):
-			hide()
-			hit.emit()
+			on_hit()
 
 
 
@@ -129,7 +129,17 @@ func _on_shoot_timer_timeout():
 	shoot()
 
 
-func _on_hit():
-	disable_shoot = true
-	$ShootTimer.wait_time = Globals.fire_rate
-	$DeathSound.play()
+func on_hit():
+	Globals.health -= 1
+	$CollisionShape2D.disabled = true
+
+	if Globals.health <= 0:
+		hide()
+		hit.emit()
+		disable_shoot = true
+		Globals.fire_rate = 0.3
+		$ShootTimer.wait_time = Globals.fire_rate
+		$DeathSound.play()
+	else: 
+		await get_tree().create_timer(2.0).timeout
+		$CollisionShape2D.disabled = false

@@ -6,6 +6,7 @@ const StarDestroyer = preload("res://scene/star_destroyer.tscn")
 
 var spawnable = [TieFighter, TieInterceptor]
 
+var health = Globals.health
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -86,6 +87,7 @@ func spawn_star_destroyer():
 		$RoundTimer.start()
 	
 func new_game():
+	$Player/CollisionShape2D.disabled = false
 	$Player.position = $StartPlayerPosition.position
 	$Player.speed = Globals.player_speed
 	$Player/ShootTimer.wait_time = Globals.fire_rate

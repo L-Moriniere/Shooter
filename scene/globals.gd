@@ -17,6 +17,8 @@ var fire_rate = 0.3
 var number_weapon = 1
 var label_fire_rate = 0
 var label_speed = 0
+var health = 2
+
 
 #Mobs
 var round_boss_base = 4
