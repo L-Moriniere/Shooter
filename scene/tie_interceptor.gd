@@ -10,6 +10,7 @@ const explosion = preload("res://scene/explosion.tscn")
 
 
 var health = 2
+var disable_shoot : bool = false
 
 
 func _physics_process(delta):
@@ -23,6 +24,7 @@ func _physics_process(delta):
 func take_damage():
 	health -= 1
 	if health == 0:
+		$DeathSound.play()
 		Globals.mob_hit += 1
 		Globals.score += 1
 		get_node("/root/Main/HUD").update_score()
@@ -30,7 +32,11 @@ func take_damage():
 		add_child(e)
 		e.play("default")
 		$Explode.start()
-		drop_item()
+		disable_shoot=true
+		await get_tree().create_timer(0.15).timeout
+		hide()
+		$CollisionShape2D.disabled = true
+
 		
 		
 func shoot():
@@ -38,19 +44,18 @@ func shoot():
 	
 
 func spawnLaser(weapon):
-	var new_laser = LaserMob.instantiate()
-	var starting_position = weapon.global_position
-	var dir = global_position.direction_to(player.global_position)
-	var _rotation = rad_to_deg(atan2(dir.y, dir.x))
-	new_laser.start(starting_position, dir, _rotation)
-	weapon.add_child(new_laser)
-
-func _on_explode_timeout():
-	queue_free()
+	if !disable_shoot:
+		var new_laser = LaserMob.instantiate()
+		var starting_position = weapon.global_position
+		var dir = global_position.direction_to(player.global_position)
+		var _rotation = rad_to_deg(atan2(dir.y, dir.x))
+		new_laser.start(starting_position, dir, _rotation)
+		$ShootSound.play()
+		weapon.add_child(new_laser)
 
 func drop_item():
 	var random_number = randf()
-	var proba = 0.2
+	var proba = 1
 	if random_number < proba:
 		var powerup_instance = POWERUP_NODE.instantiate()
 		powerup_instance.position = position
@@ -62,3 +67,7 @@ func drop_item():
 func _on_shoot_timer_timeout():
 	shoot()
 
+
+
+func _on_death_sound_finished():
+	queue_free()

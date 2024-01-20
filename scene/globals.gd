@@ -9,6 +9,7 @@ var is_game_over = false
 var score = 0
 
 #Player
+var player_speed = 400
 var lvl_power = 1
 var fire_rate = 0.3
 var number_weapon = 1

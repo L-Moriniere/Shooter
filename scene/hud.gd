@@ -24,9 +24,9 @@ func reset_score():
 
 func show_game_over():
 	show_message("Game Over")
+	reset_count()
 	# Wait until the MessageTimer has counted down.
 	await $MessageTimer.timeout
-	reset_count()
 	# Make a one-shot timer and wait for it to finish.
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
@@ -51,6 +51,7 @@ func reset_count():
 	Globals.mob_per_round = 1
 	Globals.mob_hit = 0
 	Globals.lvl_power = 1
+	Globals.player_speed = 400
 	Globals.fire_rate = 0.3
 	Globals.number_weapon = 1
 	Globals.is_boss_defeated = false
@@ -70,3 +71,6 @@ func _on_message_timer_timeout():
 func _on_start_button_pressed():
 	$StartButton.hide()
 	start_game.emit()
+
+func play_die_sound():
+	pass

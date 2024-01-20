@@ -6,12 +6,14 @@ extends CharacterBody2D
 
 signal hit
 
+
 const LASER = preload("res://scene/laser.tscn")
 const ROTATION_SPEED = 15
 
 var last_direction = Vector2.DOWN
 var target_angle : float
 var shoot_right = false
+var disable_shoot : bool = true
 
 func _ready():
 	$ShootTimer.wait_time = Globals.fire_rate
@@ -33,39 +35,39 @@ func _physics_process(delta):
 
 
 func shoot():
-	
-	match (Globals.number_weapon):
-		1:
-			var weapon = %ShootingPointLExt
-			if shoot_right == false:
-				weapon = %ShootingPointRExt
-				shoot_right = true
-			else:
-				shoot_right = false
-	
-			spawnLaser(weapon)
-		2:
-			var weapon1 = %ShootingPointLExt
-			var weapon2 = %ShootingPointRExt
-			spawnLaser(weapon1)
-			spawnLaser(weapon2)
-			
-		3:
-			var weapon1 = %ShootingPointLExt
-			var weapon2 = %ShootingPointRExt
-			var weapon3 = %ShootingPointLInt
-			spawnLaser(weapon1)
-			spawnLaser(weapon2)
-			spawnLaser(weapon3)
-		4:
-			var weapon1 = %ShootingPointLExt
-			var weapon2 = %ShootingPointRExt
-			var weapon3 = %ShootingPointLInt
-			var weapon4 = %ShootingPointRInt
-			spawnLaser(weapon1)
-			spawnLaser(weapon2)
-			spawnLaser(weapon3)
-			spawnLaser(weapon4)
+	if !disable_shoot:
+		match (Globals.number_weapon):
+			1:
+				var weapon = %ShootingPointLExt
+				if shoot_right == false:
+					weapon = %ShootingPointRExt
+					shoot_right = true
+				else:
+					shoot_right = false
+		
+				spawnLaser(weapon)
+			2:
+				var weapon1 = %ShootingPointLExt
+				var weapon2 = %ShootingPointRExt
+				spawnLaser(weapon1)
+				spawnLaser(weapon2)
+				
+			3:
+				var weapon1 = %ShootingPointLExt
+				var weapon2 = %ShootingPointRExt
+				var weapon3 = %ShootingPointLInt
+				spawnLaser(weapon1)
+				spawnLaser(weapon2)
+				spawnLaser(weapon3)
+			4:
+				var weapon1 = %ShootingPointLExt
+				var weapon2 = %ShootingPointRExt
+				var weapon3 = %ShootingPointLInt
+				var weapon4 = %ShootingPointRInt
+				spawnLaser(weapon1)
+				spawnLaser(weapon2)
+				spawnLaser(weapon3)
+				spawnLaser(weapon4)
 
 		
 
@@ -75,6 +77,7 @@ func spawnLaser(weapon):
 	var dir = last_direction.normalized()
 	var _rotation = rad_to_deg(atan2(dir.y, dir.x))
 	new_laser.start(starting_position, last_direction, _rotation)
+	$ShootSound.play()
 	weapon.add_child(new_laser)
 
 
@@ -101,11 +104,10 @@ func get_input(delta):
 func power_up():
 	var array = [1,2,3]
 	var item = array[randi() % array.size()] 
-	item = 3
 	match item:
 		1:
-			speed +=25
-			Globals.label_speed += 25
+			speed += 20
+			Globals.label_speed += 5
 			get_node('/root/Main/HUD').update_speed_label()
 		2:
 			if Globals.fire_rate > 0.001 :
@@ -124,3 +126,8 @@ func power_up():
 
 func _on_shoot_timer_timeout():
 	shoot()
+
+
+func _on_hit():
+	disable_shoot = true
+	$DeathSound.play()

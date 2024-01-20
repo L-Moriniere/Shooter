@@ -1,9 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://dp6vancm0x2mo"]
+[gd_scene load_steps=11 format=3 uid="uid://dp6vancm0x2mo"]
 
 [ext_resource type="Script" path="res://scene/main.gd" id="1_1w23u"]
 [ext_resource type="PackedScene" uid="uid://b4wkicqm77rwm" path="res://scene/player.tscn" id="1_xfttf"]
 [ext_resource type="Shader" path="res://assets/shader/retrotv.gdshader" id="2_y8ibb"]
 [ext_resource type="PackedScene" uid="uid://cedun5fmqf6yu" path="res://scene/hud.tscn" id="3_3wlti"]
+[ext_resource type="AudioStream" uid="uid://btont1uvxgxbq" path="res://assets/music/Star Wars Clone Wars Theme [8 Bit Tribute to Star Wars] - 8 Bit Universe.mp3" id="5_1xmho"]
+[ext_resource type="AudioStream" uid="uid://opm76yeym81" path="res://assets/music/Imperial Suite (8-BIT) - Rogue One.mp3" id="6_qyilg"]
+[ext_resource type="AudioStream" uid="uid://ctfrjvtans8rv" path="res://assets/music/Lego yoda death sound.wav" id="7_cqdec"]
+[ext_resource type="AudioStream" uid="uid://d04e6q1hccgnj" path="res://assets/music/Star Destroyer exits light speed.wav" id="8_34ldl"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d7r7g"]
 shader = ExtResource("2_y8ibb")
@@ -67,10 +71,27 @@ position = Vector2(500, 252)
 [node name="HUD" parent="." instance=ExtResource("3_3wlti")]
 
 [node name="StartTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.5
 
 [node name="StartPlayerPosition" type="Marker2D" parent="."]
 position = Vector2(500, 460)
+
+[node name="StartMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_1xmho")
+volume_db = -30.0
+autoplay = true
+
+[node name="PlayMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_qyilg")
+volume_db = -25.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_cqdec")
+volume_db = -15.0
+
+[node name="SoundEntering" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_34ldl")
+volume_db = -15.0
 
 [connection signal="hit" from="Player" to="." method="game_over"]
 [connection signal="timeout" from="RoundTimer" to="." method="_on_round_timer_timeout"]

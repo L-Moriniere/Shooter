@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://btont1uvxgxbq"
+path="res://.godot/imported/Star Wars Clone Wars Theme [8 Bit Tribute to Star Wars] - 8 Bit Universe.mp3-cd2560c9f5a1be24aefe6d237570a5cf.mp3str"
+
+[deps]
+
+source_file="res://assets/music/Star Wars Clone Wars Theme [8 Bit Tribute to Star Wars] - 8 Bit Universe.mp3"
+dest_files=["res://.godot/imported/Star Wars Clone Wars Theme [8 Bit Tribute to Star Wars] - 8 Bit Universe.mp3-cd2560c9f5a1be24aefe6d237570a5cf.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

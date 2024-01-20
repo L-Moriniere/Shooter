@@ -1,7 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://djv1w8nwfgxuc"]
+[gd_scene load_steps=6 format=3 uid="uid://djv1w8nwfgxuc"]
 
 [ext_resource type="Script" path="res://scene/tie_interceptor.gd" id="1_aj8m6"]
 [ext_resource type="Texture2D" uid="uid://tyieysmloccy" path="res://assets/tieinterceptor.png" id="1_mbks4"]
+[ext_resource type="AudioStream" uid="uid://7qxng2nnfwjh" path="res://assets/music/Star Wars tie fighter blaster sound effect.wav" id="3_rqo3v"]
+[ext_resource type="AudioStream" uid="uid://ctfrjvtans8rv" path="res://assets/music/Lego yoda death sound.wav" id="4_yyme6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6a6c"]
 size = Vector2(40, 45)
@@ -32,6 +34,14 @@ position = Vector2(15, 0)
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="ShootSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rqo3v")
+volume_db = -15.0
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yyme6")
+volume_db = -15.0
 
 [connection signal="timeout" from="Explode" to="." method="_on_explode_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

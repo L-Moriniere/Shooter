@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjy58nc2872w6"]
+[gd_scene load_steps=5 format=3 uid="uid://cjy58nc2872w6"]
 
 [ext_resource type="Texture2D" uid="uid://byprt4q2pngty" path="res://assets/crystal.png" id="1_0tole"]
 [ext_resource type="Script" path="res://scene/powerup.gd" id="1_05w2b"]
+[ext_resource type="AudioStream" uid="uid://baqrrbq6oh2xs" path="res://assets/music/roger.wav" id="3_7np7a"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_v17j3"]
 
@@ -16,4 +17,8 @@ shape = SubResource("CapsuleShape2D_v17j3")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_0tole")
 
+[node name="PowerUpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7np7a")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="finished" from="PowerUpSound" to="." method="_on_power_up_sound_finished"]

@@ -6,9 +6,11 @@ const StarDestroyer = preload("res://scene/star_destroyer.tscn")
 
 var spawnable = [TieFighter, TieInterceptor]
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
+	$Player.hide()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -28,11 +30,12 @@ func _process(delta):
 	elif Globals.round_count == Globals.round_boss_spawn and !Globals.is_boss_defeated:
 		$RoundTimer.start()
 		if !get_node("star_destroyer"):
+			$SoundEntering.play()
 			var destroyer = StarDestroyer.instantiate()
 			destroyer.position = $DestroyerStartPosition.global_position
 			destroyer.rotation_degrees = -90
 			add_child(destroyer)
-			$MobTimer.wait_time = 2.0
+			$MobTimer.wait_time = 3.0
 			await get_tree().create_timer(1.0).timeout
 			$MobTimer.start()
 			
@@ -69,11 +72,17 @@ func _on_mob_timer_timeout():
 
 	
 func new_game():
+	$Player.position = $StartPlayerPosition.position
+	$Player.speed = Globals.player_speed
+	$Player/ShootTimer.wait_time = Globals.fire_rate
 	$Player.show()
 	$StartTimer.start()
 	$HUD.show_message("Get Ready")
 	$HUD.reset_score()
+	$StartMusic.stop()
+	$PlayMusic.play()
 	Globals.is_game_over = false
+	$Player.disable_shoot = false
 
 func game_over():
 	$HUD.show_game_over()

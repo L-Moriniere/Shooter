@@ -1,12 +1,11 @@
 extends CharacterBody2D
 
 @export var speed = randi_range(120,220)
-const explosion = preload("res://scene/explosion.tscn") 
-
-
 @onready var player = get_node("/root/Main/Player")
 @onready var POWERUP_NODE = preload("res://scene/powerup.tscn")
+const explosion = preload("res://scene/explosion.tscn") 
 
+signal die
 var health = 1
 
 
@@ -20,6 +19,7 @@ func _physics_process(delta):
 func take_damage():
 	health -= 1
 	if health == 0:
+		$DeathSound.play()
 		Globals.mob_hit += 1
 		Globals.score += 1
 		get_node("/root/Main/HUD").update_score()
@@ -28,6 +28,9 @@ func take_damage():
 		e.play("default")
 		$Explode.start()
 		drop_item()
+		await get_tree().create_timer(0.15).timeout
+		hide()
+		$CollisionShape2D.disabled = true
 
 
 func drop_item():
@@ -41,7 +44,5 @@ func drop_item():
 
 
 
-func _on_explode_timeout():
+func _on_death_sound_finished():
 	queue_free()
-
-
