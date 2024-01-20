@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4wkicqm77rwm"]
+[gd_scene load_steps=7 format=3 uid="uid://b4wkicqm77rwm"]
 
 [ext_resource type="Script" path="res://scene/player.gd" id="1_grmq8"]
 [ext_resource type="Texture2D" uid="uid://d177vom1u1l6y" path="res://assets/xwing.png" id="2_nvqv7"]
 [ext_resource type="AudioStream" uid="uid://cwxx04gkq5h1" path="res://assets/music/laser1.wav" id="3_o7qti"]
 [ext_resource type="AudioStream" uid="uid://ctfrjvtans8rv" path="res://assets/music/Lego yoda death sound.wav" id="4_rpk5k"]
+[ext_resource type="AudioStream" uid="uid://baqrrbq6oh2xs" path="res://assets/music/roger.wav" id="5_fyyos"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8hkk"]
 size = Vector2(40, 29)
@@ -67,6 +68,9 @@ volume_db = -40.0
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_rpk5k")
 volume_db = -15.0
+
+[node name="PowerUpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_fyyos")
 
 [connection signal="hit" from="." to="." method="_on_hit"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

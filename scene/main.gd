@@ -15,34 +15,41 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Globals.mob_hit == Globals.mob_per_round and get_tree().get_nodes_in_group("powerup").size() == 0 and Globals.round_count != Globals.round_boss_spawn:
+	
+	if Globals.mob_hit == Globals.mob_per_round or Globals.is_boss_defeated:
+		Globals.is_round_finished = true
+		Globals.is_boss_defeated = false
+		
+	if Globals.is_round_finished:
+		Globals.is_round_finished = false
 		$MobTimer.stop()
-		$RoundTimer.start()
 		Globals.mob_count = 0
 		Globals.mob_hit = 0
-		Globals.round_count += 1
-		get_node("HUD/RoundLabel").text = "Round : %s" % Globals.round_count
+		update_round()
 		Globals.mob_per_round += randi_range(2,4)
+		Globals.mob_count_last_round = Globals.mob_per_round 
 		if Globals.round_count >= Globals.round_boss_spawn:
 			increase_speed_mobs()
+		start_round()
+	
 		
-		
-	elif Globals.round_count == Globals.round_boss_spawn and !Globals.is_boss_defeated:
-		$RoundTimer.start()
-		if !get_node("star_destroyer"):
-			$SoundEntering.play()
-			var destroyer = StarDestroyer.instantiate()
-			destroyer.position = $DestroyerStartPosition.global_position
-			destroyer.rotation_degrees = -90
-			add_child(destroyer)
-			$MobTimer.wait_time = 3.0
-			await get_tree().create_timer(1.0).timeout
-			$MobTimer.start()
-			
-		
-			
+	
 
+	
+		
+		
+		
+func start_round():
+	$RoundTimer.start()
+	if Globals.round_count == Globals.round_boss_spawn:
+			spawn_star_destroyer()
+		
 
+func update_round():
+	Globals.round_count += 1
+	get_node("HUD/RoundLabel").text = "Round %s" % Globals.round_count
+	
+	
 func _on_player_shoot(Laser, direction, location):
 	var spawned_laser = Laser.instantiate()
 	add_child(spawned_laser)
@@ -69,7 +76,14 @@ func _on_mob_timer_timeout():
 			add_child(spawn)
 			Globals.mob_count += 1
 	
-
+func spawn_star_destroyer():
+	if !get_node("star_destroyer") and Globals.round_count == Globals.round_boss_spawn and !Globals.is_boss_defeated:
+		$SoundEntering.play()
+		var destroyer = StarDestroyer.instantiate()
+		destroyer.position = $DestroyerStartPosition.global_position
+		destroyer.rotation_degrees = -90
+		add_child(destroyer)
+		$RoundTimer.start()
 	
 func new_game():
 	$Player.position = $StartPlayerPosition.position
@@ -95,7 +109,9 @@ func game_over():
 		powerup.queue_free()
 
 func _on_round_timer_timeout():
+	Globals.is_round_finished = false
 	$MobTimer.start()
+
 
 	
 func increase_speed_mobs():

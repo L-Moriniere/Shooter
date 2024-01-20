@@ -36,11 +36,11 @@ func take_damage():
 func drop_item():
 	var random_number = randf()
 	var proba = 0.3
-	if random_number < proba:
-		var powerup_instance = POWERUP_NODE.instantiate()
-		powerup_instance.position = position
-		get_parent().add_child(powerup_instance)
-		powerup_instance.collected.connect(get_node("/root/Main/Player").power_up)
+#	if random_number < proba:
+	var powerup_instance = POWERUP_NODE.instantiate()
+	powerup_instance.position = position
+	get_parent().add_child(powerup_instance)
+	powerup_instance.collected.connect(get_node("/root/Main/Player").power_up)
 
 
 

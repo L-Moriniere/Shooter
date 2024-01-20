@@ -19,7 +19,7 @@ func show_message(text):
 
 
 func reset_score():
-	$RoundLabel.text = "Score : 1"
+	$RoundLabel.text = "Round 1"
 	$MobKilled.text = "Ships destroyed : 0"
 
 func show_game_over():
@@ -46,6 +46,7 @@ func update_speed_fire_rate_label():
 	
 	
 func reset_count():
+	Globals.score = 0
 	Globals.round_count = 1
 	Globals.mob_count = 0
 	Globals.mob_per_round = 1

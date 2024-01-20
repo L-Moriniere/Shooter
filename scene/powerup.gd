@@ -9,12 +9,8 @@ func _physics_process(delta):
 
 
 func _on_body_entered(body):
+	$CollisionShape2D.disabled = true
 	if body.is_in_group("player"):
-		$PowerUpSound.play()
+		queue_free()
 		emit_signal("collected")
-		hide()
-		$CollisionShape2D.disabled = true
-
-
-func _on_power_up_sound_finished():
-	queue_free()
+	

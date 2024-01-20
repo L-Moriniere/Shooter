@@ -102,6 +102,7 @@ func get_input(delta):
 	
 
 func power_up():
+	$PowerUpSound.play()
 	var array = [1,2,3]
 	var item = array[randi() % array.size()] 
 	match item:
@@ -130,4 +131,5 @@ func _on_shoot_timer_timeout():
 
 func _on_hit():
 	disable_shoot = true
+	$ShootTimer.wait_time = Globals.fire_rate
 	$DeathSound.play()

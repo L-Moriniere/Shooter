@@ -55,7 +55,7 @@ func spawnLaser(weapon):
 
 func drop_item():
 	var random_number = randf()
-	var proba = 1
+	var proba = 0.3
 	if random_number < proba:
 		var powerup_instance = POWERUP_NODE.instantiate()
 		powerup_instance.position = position

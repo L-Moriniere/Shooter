@@ -4,9 +4,11 @@ extends Node
 var mob_hit = 0
 var round_count = 1
 var mob_count = 0
+var mob_count_last_round
 var mob_per_round = 1
 var is_game_over = false
 var score = 0
+var is_round_finished : bool = false
 
 #Player
 var player_speed = 400
