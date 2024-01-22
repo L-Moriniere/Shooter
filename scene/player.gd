@@ -2,7 +2,6 @@ extends CharacterBody2D
 
 @export var speed = 400
 @onready var screen_size = get_viewport_rect().size
-@onready var POWERUP_NODE = preload("res://scene/powerup.tscn")
 
 signal hit
 
@@ -19,7 +18,7 @@ func _ready():
 	$ShootTimer.wait_time = Globals.fire_rate
 	
 func _physics_process(delta):
-	print(Globals.health)
+
 	get_input(delta)
 
 	move_and_slide()
@@ -101,6 +100,11 @@ func get_input(delta):
 		rotation = lerp_angle(rotation, target_angle, delta * ROTATION_SPEED) 
 	
 
+func gain_heart():
+	Globals.health += 1
+	get_node("/root/Main/HUD/HealthSprite").play("2life")
+	$HealSound.play()
+
 func power_up():
 	$PowerUpSound.play()
 	var array = [1,2,3]
@@ -131,8 +135,8 @@ func _on_shoot_timer_timeout():
 
 func on_hit():
 	Globals.health -= 1
+	get_node("/root/Main/HUD/HealthSprite").play("1life")
 	$CollisionShape2D.disabled = true
-
 	if Globals.health <= 0:
 		hide()
 		hit.emit()
@@ -141,5 +145,6 @@ func on_hit():
 		$ShootTimer.wait_time = Globals.fire_rate
 		$DeathSound.play()
 	else: 
+		$LosingPvSound.play()
 		await get_tree().create_timer(2.0).timeout
 		$CollisionShape2D.disabled = false

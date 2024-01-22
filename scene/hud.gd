@@ -23,6 +23,7 @@ func reset_score():
 	$MobKilled.text = "Ships destroyed : 0"
 
 func show_game_over():
+	$HealthSprite.play("0life")
 	show_message("Game Over")
 	reset_count()
 	# Wait until the MessageTimer has counted down.
@@ -52,8 +53,9 @@ func reset_count():
 	Globals.mob_per_round = 1
 	Globals.mob_hit = 0
 	Globals.lvl_power = 1
-	Globals.player_speed = 400
+	Globals.player_speed = 350
 	Globals.health = 2
+	Globals.fire_rate = 0.4
 	Globals.number_weapon = 1
 	Globals.is_boss_defeated = false
 	Globals.round_boss_base = 4

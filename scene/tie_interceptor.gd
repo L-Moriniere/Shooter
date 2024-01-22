@@ -5,7 +5,8 @@ extends CharacterBody2D
 const explosion = preload("res://scene/explosion.tscn") 
 
 @onready var player = get_node("/root/Main/Player")
-@onready var POWERUP_NODE = preload("res://scene/powerup.tscn")
+@onready var PowerUp = preload("res://scene/powerup.tscn")
+@onready var Heart = preload("res://scene/heart.tscn")
 @onready var LaserMob = preload("res://scene/laser_mobs.tscn")
 
 
@@ -55,12 +56,19 @@ func spawnLaser(weapon):
 
 func drop_item():
 	var random_number = randf()
-	var proba = 0.3
+	var proba = 0.4
 	if random_number < proba:
-		var powerup_instance = POWERUP_NODE.instantiate()
-		powerup_instance.position = position
-		get_parent().add_child(powerup_instance)
-		powerup_instance.collected.connect(get_node("/root/Main/Player").power_up)
+		if Globals.health != 2  and !get_node("/root/Main/Player/Heart"):
+			var heart_instance = Heart.instantiate()
+			heart_instance.position = position
+			get_parent().add_child(heart_instance)
+			heart_instance.gain_life.connect(get_node("/root/Main/Player").gain_heart)
+		else :
+			var powerup_instance = PowerUp.instantiate()
+			powerup_instance.position = position
+			get_parent().add_child(powerup_instance)
+			powerup_instance.collected.connect(get_node("/root/Main/Player").power_up)
+	
 
 
 

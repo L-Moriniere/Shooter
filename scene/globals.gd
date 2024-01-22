@@ -11,9 +11,9 @@ var score = 0
 var is_round_finished : bool = false
 
 #Player
-var player_speed = 400
+var player_speed = 350
 var lvl_power = 1
-var fire_rate = 0.3
+var fire_rate = 0.4
 var number_weapon = 1
 var label_fire_rate = 0
 var label_speed = 0

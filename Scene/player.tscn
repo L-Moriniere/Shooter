@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://b4wkicqm77rwm"]
+[gd_scene load_steps=9 format=3 uid="uid://b4wkicqm77rwm"]
 
 [ext_resource type="Script" path="res://scene/player.gd" id="1_grmq8"]
 [ext_resource type="Texture2D" uid="uid://d177vom1u1l6y" path="res://assets/xwing.png" id="2_nvqv7"]
 [ext_resource type="AudioStream" uid="uid://cwxx04gkq5h1" path="res://assets/music/laser1.wav" id="3_o7qti"]
-[ext_resource type="AudioStream" uid="uid://ctfrjvtans8rv" path="res://assets/music/Lego yoda death sound.wav" id="4_rpk5k"]
+[ext_resource type="AudioStream" uid="uid://bl5jnl4l8528v" path="res://assets/music/rdscream.wav" id="4_bsdmw"]
 [ext_resource type="AudioStream" uid="uid://baqrrbq6oh2xs" path="res://assets/music/roger.wav" id="5_fyyos"]
+[ext_resource type="AudioStream" uid="uid://faknq3trvwdj" path="res://assets/music/r2hurt.wav" id="6_0kyas"]
+[ext_resource type="AudioStream" uid="uid://dulc417u4ydx8" path="res://assets/music/r2heal.wav" id="7_7vha7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8hkk"]
 size = Vector2(40, 29)
@@ -66,11 +68,19 @@ stream = ExtResource("3_o7qti")
 volume_db = -40.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_rpk5k")
+stream = ExtResource("4_bsdmw")
 volume_db = -15.0
 
 [node name="PowerUpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_fyyos")
+
+[node name="LosingPvSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_0kyas")
+volume_db = -15.0
+
+[node name="HealSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_7vha7")
+volume_db = -10.0
 
 [connection signal="hit" from="." to="." method="_on_hit"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

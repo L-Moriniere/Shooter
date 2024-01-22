@@ -16,7 +16,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	print(Globals.health)
 	if Globals.mob_hit == Globals.mob_per_round or Globals.is_boss_defeated:
 		Globals.is_round_finished = true
 		Globals.is_boss_defeated = false
@@ -29,7 +29,7 @@ func _process(delta):
 		update_round()
 		Globals.mob_per_round += randi_range(2,4)
 		Globals.mob_count_last_round = Globals.mob_per_round 
-		if Globals.round_count >= Globals.round_boss_spawn:
+		if Globals.round_count >= 5:
 			increase_speed_mobs()
 		start_round()
 	
@@ -95,6 +95,7 @@ func new_game():
 	$StartTimer.start()
 	$HUD.show_message("Get Ready")
 	$HUD.reset_score()
+	$HUD/HealthSprite.play("2life")
 	$StartMusic.stop()
 	$PlayMusic.play()
 	Globals.is_game_over = false
@@ -107,7 +108,7 @@ func game_over():
 	await get_tree().create_timer(1.0).timeout
 	for enemy in get_tree().get_nodes_in_group("mobs"):
 		enemy.queue_free()
-	for powerup in get_tree().get_nodes_in_group("powerup"):
+	for powerup in get_tree().get_nodes_in_group("collectable"):
 		powerup.queue_free()
 
 func _on_round_timer_timeout():
