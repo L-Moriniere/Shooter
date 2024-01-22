@@ -83,7 +83,7 @@ autoplay = true
 
 [node name="PlayMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_qyilg")
-volume_db = -25.0
+volume_db = -30.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_cqdec")

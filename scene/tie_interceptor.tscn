@@ -1,12 +1,73 @@
-[gd_scene load_steps=6 format=3 uid="uid://djv1w8nwfgxuc"]
+[gd_scene load_steps=13 format=3 uid="uid://djv1w8nwfgxuc"]
 
 [ext_resource type="Script" path="res://scene/tie_interceptor.gd" id="1_aj8m6"]
 [ext_resource type="Texture2D" uid="uid://tyieysmloccy" path="res://assets/tieinterceptor.png" id="1_mbks4"]
+[ext_resource type="Shader" path="res://assets/shader/hit.gdshader" id="2_pokv0"]
 [ext_resource type="AudioStream" uid="uid://7qxng2nnfwjh" path="res://assets/music/Star Wars tie fighter blaster sound effect.wav" id="3_rqo3v"]
 [ext_resource type="AudioStream" uid="uid://ctfrjvtans8rv" path="res://assets/music/Lego yoda death sound.wav" id="4_yyme6"]
+[ext_resource type="AudioStream" uid="uid://b7uvxeytduly" path="res://assets/music/Hit.wav" id="6_r6tfy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jnlnc"]
+resource_local_to_scene = true
+shader = ExtResource("2_pokv0")
+shader_parameter/flash_opacity = 1.0
+shader_parameter/flash_color = Color(0.454902, 0, 0.0156863, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6a6c"]
 size = Vector2(40, 45)
+
+[sub_resource type="Animation" id="Animation_iffvu"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_kcgt5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_gt2as"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u42rp"]
+_data = {
+"RESET": SubResource("Animation_kcgt5"),
+"default": SubResource("Animation_gt2as"),
+"hit": SubResource("Animation_iffvu")
+}
 
 [node name="TieInterceptor" type="CharacterBody2D" groups=["mobs"]]
 collision_layer = 2
@@ -14,11 +75,13 @@ collision_mask = 0
 script = ExtResource("1_aj8m6")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_jnlnc")
 rotation = 1.57079
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_mbks4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(6, 0)
 shape = SubResource("RectangleShape2D_j6a6c")
 
@@ -42,6 +105,16 @@ volume_db = -15.0
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_yyme6")
 volume_db = -15.0
+
+[node name="HitAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u42rp")
+}
+autoplay = "default"
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_r6tfy")
+volume_db = -30.0
 
 [connection signal="timeout" from="Explode" to="." method="_on_explode_timeout"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

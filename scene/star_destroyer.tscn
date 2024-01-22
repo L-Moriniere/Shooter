@@ -1,7 +1,69 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckhv5jw6d6nst"]
+[gd_scene load_steps=10 format=3 uid="uid://ckhv5jw6d6nst"]
 
 [ext_resource type="Texture2D" uid="uid://b3s67lefw0g5p" path="res://assets/stardestroyer.png" id="1_60mj8"]
 [ext_resource type="Script" path="res://scene/star_destroyer.gd" id="1_tqyrp"]
+[ext_resource type="Shader" path="res://assets/shader/hit.gdshader" id="2_wfrqh"]
+[ext_resource type="AudioStream" uid="uid://b7uvxeytduly" path="res://assets/music/Hit.wav" id="4_j04dr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wyd1w"]
+resource_local_to_scene = true
+shader = ExtResource("2_wfrqh")
+shader_parameter/flash_opacity = 0.0
+shader_parameter/flash_color = Color(0.454873, 0, 0.0170486, 1)
+
+[sub_resource type="Animation" id="Animation_v5bsd"]
+resource_name = "default"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_71iv4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_8paex"]
+resource_name = "hit"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/flash_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p5j5r"]
+_data = {
+"RESET": SubResource("Animation_71iv4"),
+"default": SubResource("Animation_v5bsd"),
+"hit": SubResource("Animation_8paex")
+}
 
 [node name="star_destroyer" type="CharacterBody2D" groups=["mobs"]]
 collision_layer = 2
@@ -9,6 +71,7 @@ collision_mask = 0
 script = ExtResource("1_tqyrp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_wyd1w")
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("1_60mj8")
 
@@ -27,6 +90,15 @@ autostart = true
 position = Vector2(-60, 34)
 
 [node name="Explode" type="Timer" parent="." groups=["mobs"]]
+
+[node name="HitAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_p5j5r")
+}
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_j04dr")
+volume_db = -30.0
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
 [connection signal="timeout" from="Explode" to="." method="_on_explode_timeout"]

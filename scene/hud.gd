@@ -55,8 +55,10 @@ func reset_count():
 	Globals.lvl_power = 1
 	Globals.player_speed = 350
 	Globals.health = 2
-	Globals.fire_rate = 0.4
+	Globals.fire_rate = 0.6
 	Globals.number_weapon = 1
+	Globals.label_speed = 0
+	Globals.label_fire_rate
 	Globals.is_boss_defeated = false
 	Globals.round_boss_base = 4
 	Globals.speed_tie_fighter = 100

@@ -9,6 +9,7 @@ const explosion = preload("res://scene/explosion.tscn")
 signal die
 var health = 1
 
+	
 
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
@@ -18,6 +19,7 @@ func _physics_process(delta):
 
 
 func take_damage():
+	$HitAnimation.play("hit")
 	health -= 1
 	if health == 0:
 		$DeathSound.play()
@@ -38,7 +40,7 @@ func drop_item():
 	var random_number = randf()
 	var proba = 0.4
 	if random_number < proba:
-		if Globals.health != 2 and !get_node("/root/Main/Player/Heart"):
+		if Globals.health != 2 and get_tree().get_nodes_in_group("heart").size() == 0:
 			var heart_instance = Heart.instantiate()
 			heart_instance.position = position
 			get_parent().add_child(heart_instance)

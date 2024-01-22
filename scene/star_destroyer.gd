@@ -36,6 +36,8 @@ func _on_spawn_timer_timeout():
 	
 func take_damage():
 	health -= 1
+	$HitAnimation.play("hit")
+	$HitSound.play()
 	if health == 0:
 		Globals.round_boss_base = Globals.round_boss_base + randi_range(2,4)
 		Globals.score += 10

@@ -13,7 +13,8 @@ const explosion = preload("res://scene/explosion.tscn")
 var health = 2
 var disable_shoot : bool = false
 
-
+	
+	
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
 	rotation = position.angle_to_point(player.global_position)
@@ -24,6 +25,8 @@ func _physics_process(delta):
 
 func take_damage():
 	health -= 1
+	$HitAnimation.play("hit")
+	$HitSound.play()
 	if health == 0:
 		$DeathSound.play()
 		Globals.mob_hit += 1

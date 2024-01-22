@@ -101,9 +101,10 @@ func get_input(delta):
 	
 
 func gain_heart():
-	Globals.health += 1
-	get_node("/root/Main/HUD/HealthSprite").play("2life")
-	$HealSound.play()
+	if Globals.health < 2:
+		Globals.health += 1
+		get_node("/root/Main/HUD/HealthSprite").play("2life")
+		$HealSound.play()
 
 func power_up():
 	$PowerUpSound.play()
@@ -134,6 +135,7 @@ func _on_shoot_timer_timeout():
 
 
 func on_hit():
+	$HitPlayerSound.play()
 	Globals.health -= 1
 	get_node("/root/Main/HUD/HealthSprite").play("1life")
 	$CollisionShape2D.disabled = true

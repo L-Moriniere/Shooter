@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q7xko"]
 size = Vector2(38, 38)
 
-[node name="Heart" type="Area2D" groups=["collectable"]]
+[node name="Heart" type="Area2D" groups=["collectable", "heart"]]
 collision_layer = 0
 script = ExtResource("1_qu1sw")
 

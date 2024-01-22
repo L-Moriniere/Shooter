@@ -16,7 +16,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(Globals.health)
 	if Globals.mob_hit == Globals.mob_per_round or Globals.is_boss_defeated:
 		Globals.is_round_finished = true
 		Globals.is_boss_defeated = false
@@ -65,13 +64,11 @@ func _on_mob_timer_timeout():
 		var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
 		mob_spawn_location.progress_ratio = randf()
 		
-		
 		# Set the mob's direction perpendicular to the path direction.
 		var direction = mob_spawn_location.rotation + PI / 2
 
 		# Set the mob's position to a random location.
 		spawn.position = mob_spawn_location.position
-
 		# Spawn the mob by adding it to the Main scene.
 		if Globals.mob_count < Globals.mob_per_round:
 			add_child(spawn)
