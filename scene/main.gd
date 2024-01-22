@@ -126,3 +126,7 @@ func increase_speed_mobs():
 func _on_start_timer_timeout():
 	$RoundTimer.start()
 
+
+
+func _on_play_music_finished():
+	$PlayMusic.play()
