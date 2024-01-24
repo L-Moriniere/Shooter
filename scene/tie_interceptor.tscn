@@ -14,7 +14,7 @@ shader_parameter/flash_opacity = 1.0
 shader_parameter/flash_color = Color(0.454902, 0, 0.0156863, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6a6c"]
-size = Vector2(40, 45)
+size = Vector2(34, 34)
 
 [sub_resource type="Animation" id="Animation_kcgt5"]
 length = 0.001
@@ -77,12 +77,11 @@ script = ExtResource("1_aj8m6")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_jnlnc")
 rotation = 1.57079
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.08, 0.08)
 texture = ExtResource("1_mbks4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(6, 0)
+position = Vector2(5, 0)
 shape = SubResource("RectangleShape2D_j6a6c")
 
 [node name="Explode" type="Timer" parent="." groups=["mobs"]]

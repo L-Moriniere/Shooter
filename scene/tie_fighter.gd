@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = randi_range(100,200)
+@export var speed = randi_range(80,180)
 @onready var player = get_node("/root/Main/Player")
 @onready var PowerUp = preload("res://scene/powerup.tscn")
 @onready var Heart = preload("res://scene/heart.tscn")
@@ -14,6 +14,7 @@ var health = Globals.tie_fighter_health
 func _physics_process(delta):
 	var direction = global_position.direction_to(player.global_position)
 	rotation = position.angle_to_point(player.global_position)
+	look_at(player.global_position)
 	velocity = direction * speed 
 	move_and_slide()
 

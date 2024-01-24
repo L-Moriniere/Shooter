@@ -16,7 +16,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	printt(Globals.tie_fighter_health, Globals.tie_interceptor_health, Globals.round_boss_spawn, Globals.fire_rate_tie, Globals.spawn_mobs)
+
 	if Globals.is_boss_defeated:
 		Globals.spawn_mobs = false
 		if get_tree().get_nodes_in_group("mobs").size() == 0:
@@ -29,7 +29,7 @@ func _process(delta):
 
 		
 	if Globals.is_round_finished:
-		print("round finished : %s"% Globals.round_count) 
+
 		Globals.is_round_finished = false
 		Globals.spawn_mobs = false
 		Globals.mob_count = 0
@@ -68,15 +68,11 @@ func _on_player_shoot(Laser, direction, location):
 
 
 func _on_mob_timer_timeout():
-	print("ok")
 	if !Globals.is_game_over and Globals.spawn_mobs:
 		var spawn = spawnable[randi()%spawnable.size()].instantiate()
 		var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
 		mob_spawn_location.progress_ratio = randf()
 		
-		# Set the mob's direction perpendicular to the path direction.
-		var direction = mob_spawn_location.rotation + PI / 2
-
 		# Set the mob's position to a random location.
 		spawn.position = mob_spawn_location.position
 		# Spawn the mob by adding it to the Main scene.

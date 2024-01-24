@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="Star Shooter"
+config/description="2D shooter game "
 run/main_scene="res://scene/main.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://assets/sprite_d.png"
+config/icon="res://pfp.png"
 
 [autoload]
 
@@ -21,8 +22,8 @@ Globals="*res://scene/globals.tscn"
 
 [display]
 
-window/size/viewport_width=1000
-window/size/viewport_height=1000
+window/size/viewport_width=800
+window/size/viewport_height=800
 
 [editor]
 
@@ -59,3 +60,7 @@ right={
 2d_render/layer_3="Powerups"
 2d_physics/layer_1="Player"
 2d_physics/layer_2="Mob"
+
+[rendering]
+
+renderer/rendering_method="gl_compatibility"

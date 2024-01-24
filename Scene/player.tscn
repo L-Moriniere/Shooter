@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bvype4whnnmem" path="res://assets/music/HitPlayer.wav" id="8_qp0i5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m8hkk"]
-size = Vector2(40, 29)
+size = Vector2(32, 29)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 6
@@ -19,12 +19,12 @@ script = ExtResource("1_grmq8")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4.5)
+position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_m8hkk")
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="."]
 rotation = -3.14159
-scale = Vector2(0.08, 0.08)
+scale = Vector2(0.06, 0.06)
 texture = ExtResource("2_nvqv7")
 
 [node name="ShootTimer" type="Timer" parent="."]
@@ -32,7 +32,7 @@ wait_time = 0.3
 autostart = true
 
 [node name="LeftWing" type="Node2D" parent="."]
-position = Vector2(18, -5)
+position = Vector2(14, -5)
 
 [node name="ShootingPointLExt" type="Marker2D" parent="LeftWing"]
 unique_name_in_owner = true
@@ -47,7 +47,7 @@ scale = Vector2(0.25, 0.25)
 gizmo_extents = 0.0
 
 [node name="RightWing" type="Node2D" parent="."]
-position = Vector2(-18, -5)
+position = Vector2(-13, -5)
 
 [node name="ShootingPointRInt" type="Marker2D" parent="RightWing"]
 unique_name_in_owner = true

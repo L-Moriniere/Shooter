@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var speed = randi_range(60,160)
+@export var speed = randi_range(80,165)
 const explosion = preload("res://scene/explosion.tscn") 
 
 @onready var player = get_node("/root/Main/Player")
