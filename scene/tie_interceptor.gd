@@ -10,7 +10,7 @@ const explosion = preload("res://scene/explosion.tscn")
 @onready var LaserMob = preload("res://scene/laser_mobs.tscn")
 
 
-var health = 2
+var health = Globals.tie_interceptor_health
 var disable_shoot : bool = false
 
 	

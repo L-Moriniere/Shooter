@@ -55,7 +55,7 @@ func reset_count():
 	Globals.lvl_power = 1
 	Globals.player_speed = 350
 	Globals.health = 2
-	Globals.fire_rate = 0.6
+	Globals.fire_rate = 0.5
 	Globals.number_weapon = 1
 	Globals.label_speed = 0
 	Globals.label_fire_rate
@@ -64,6 +64,9 @@ func reset_count():
 	Globals.speed_tie_fighter = 100
 	Globals.speed_tie_interceptor = 50
 	Globals.fire_rate_tie = 3
+	Globals.tie_fighter_health = 1
+	Globals.tie_interceptor_health = 2
+	Globals.destroyer_health = 50
 	$WeaponLabel.text = "Weapon 1"
 	$SpeedLabel.text = "Speed +0%"
 	$FireRateLabel.text = "Fire rate +0%"

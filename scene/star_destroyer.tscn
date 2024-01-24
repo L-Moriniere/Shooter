@@ -11,9 +11,8 @@ shader = ExtResource("2_wfrqh")
 shader_parameter/flash_opacity = 0.0
 shader_parameter/flash_color = Color(0.454873, 0, 0.0170486, 1)
 
-[sub_resource type="Animation" id="Animation_v5bsd"]
-resource_name = "default"
-length = 10.0
+[sub_resource type="Animation" id="Animation_71iv4"]
+length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -27,8 +26,9 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
-[sub_resource type="Animation" id="Animation_71iv4"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_v5bsd"]
+resource_name = "default"
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

@@ -57,6 +57,8 @@ curve = SubResource("Curve2D_4whqr")
 position = Vector2(0.820709, -0.000537872)
 
 [node name="RoundTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
 [node name="MobTimer" type="Timer" parent="."]
 

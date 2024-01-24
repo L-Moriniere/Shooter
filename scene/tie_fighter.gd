@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
-@export var speed = randi_range(120,220)
+@export var speed = randi_range(100,200)
 @onready var player = get_node("/root/Main/Player")
 @onready var PowerUp = preload("res://scene/powerup.tscn")
 @onready var Heart = preload("res://scene/heart.tscn")
 const explosion = preload("res://scene/explosion.tscn") 
 
 signal die
-var health = 1
+var health = Globals.tie_fighter_health
 
 	
 
@@ -20,6 +20,7 @@ func _physics_process(delta):
 
 func take_damage():
 	$HitAnimation.play("hit")
+	$HitSound.play()
 	health -= 1
 	if health == 0:
 		$DeathSound.play()

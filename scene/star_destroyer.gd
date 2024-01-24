@@ -10,7 +10,7 @@ const explosion = preload("res://scene/explosion.tscn")
 var spawnable = [TieFighter, TieInterceptor]
 var spawn_positions = [$Spawn1, $Spawn2]
 
-var health = 75
+var health = Globals.tie_interceptor_health
 @export var speed = 50
 
 

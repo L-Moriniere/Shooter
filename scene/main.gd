@@ -16,20 +16,29 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Globals.mob_hit == Globals.mob_per_round or Globals.is_boss_defeated:
+	printt(Globals.tie_fighter_health, Globals.tie_interceptor_health, Globals.round_boss_spawn, Globals.fire_rate_tie, Globals.spawn_mobs)
+	if Globals.is_boss_defeated:
+		Globals.spawn_mobs = false
+		if get_tree().get_nodes_in_group("mobs").size() == 0:
+			Globals.round_boss_spawn += randi_range(2,4)
+			Globals.is_boss_defeated = false
+			Globals.is_round_finished = true
+		
+	if Globals.mob_hit == Globals.mob_per_round:
 		Globals.is_round_finished = true
-		Globals.is_boss_defeated = false
+
 		
 	if Globals.is_round_finished:
+		print("round finished : %s"% Globals.round_count) 
 		Globals.is_round_finished = false
-		$MobTimer.stop()
+		Globals.spawn_mobs = false
 		Globals.mob_count = 0
 		Globals.mob_hit = 0
 		update_round()
 		Globals.mob_per_round += randi_range(2,4)
 		Globals.mob_count_last_round = Globals.mob_per_round 
-		if Globals.round_count >= 5:
-			increase_speed_mobs()
+		if Globals.round_count >= Globals.round_boss_spawn:
+			increase_difficulty_mobs()
 		start_round()
 	
 		
@@ -59,7 +68,8 @@ func _on_player_shoot(Laser, direction, location):
 
 
 func _on_mob_timer_timeout():
-	if !Globals.is_game_over:
+	print("ok")
+	if !Globals.is_game_over and Globals.spawn_mobs:
 		var spawn = spawnable[randi()%spawnable.size()].instantiate()
 		var mob_spawn_location = get_node("MobPath/MobSpawnLocation")
 		mob_spawn_location.progress_ratio = randf()
@@ -110,14 +120,20 @@ func game_over():
 
 func _on_round_timer_timeout():
 	Globals.is_round_finished = false
+	Globals.spawn_mobs = true
 	$MobTimer.start()
 
 
+
 	
-func increase_speed_mobs():
-	Globals.speed_tie_fighter = Globals.speed_tie_fighter + 25
-	Globals.speed_tie_interceptor = Globals.speed_tie_interceptor + 20
-	Globals.fire_rate_tie = Globals.fire_rate_tie - 0.25
+func increase_difficulty_mobs():
+	Globals.speed_tie_fighter += 25
+	Globals.speed_tie_interceptor += 20
+	Globals.fire_rate_tie -= 0.25
+	Globals.tie_fighter_health += 1
+	Globals.tie_interceptor_health += 2
+	Globals.destroyer_health += 30
+
 
 
 func _on_start_timer_timeout():

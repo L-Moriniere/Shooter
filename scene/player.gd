@@ -1,13 +1,13 @@
 extends CharacterBody2D
 
-@export var speed = 400
+@export var speed = Globals.player_speed
 @onready var screen_size = get_viewport_rect().size
 
 signal hit
 
 
 const LASER = preload("res://scene/laser.tscn")
-const ROTATION_SPEED = 15
+const ROTATION_SPEED = 30
 
 var last_direction = Vector2.DOWN
 var target_angle : float
@@ -78,6 +78,7 @@ func spawnLaser(weapon):
 	new_laser.start(starting_position, last_direction, _rotation)
 	$ShootSound.play()
 	weapon.add_child(new_laser)
+	
 
 
 func get_input(delta):
@@ -135,15 +136,14 @@ func _on_shoot_timer_timeout():
 
 
 func on_hit():
+	$CollisionShape2D.disabled = true
 	$HitPlayerSound.play()
 	Globals.health -= 1
 	get_node("/root/Main/HUD/HealthSprite").play("1life")
-	$CollisionShape2D.disabled = true
 	if Globals.health <= 0:
 		hide()
 		hit.emit()
 		disable_shoot = true
-		Globals.fire_rate = 0.3
 		$ShootTimer.wait_time = Globals.fire_rate
 		$DeathSound.play()
 	else: 

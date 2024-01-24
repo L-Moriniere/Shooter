@@ -13,7 +13,7 @@ var is_round_finished : bool = false
 #Player
 var player_speed = 350
 var lvl_power = 1
-var fire_rate = 0.6
+var fire_rate = 0.5
 var number_weapon = 1
 var label_fire_rate = 0
 var label_speed = 0
@@ -25,6 +25,10 @@ var round_boss_base = 4
 var round_boss_spawn = randi_range(round_boss_base,round_boss_base+4)
 var speed_tie_fighter = 100
 var speed_tie_interceptor = 50
-var fire_rate_tie = 3
+var fire_rate_tie = 3.5
 var is_boss_defeated = false
+var tie_fighter_health = 1
+var tie_interceptor_health = 2
+var destroyer_health = 50
+var spawn_mobs : bool = true
 
