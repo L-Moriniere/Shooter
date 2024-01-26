@@ -95,7 +95,6 @@ position = Vector2(15, 0)
 
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 3.0
-autostart = true
 
 [node name="ShootSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_rqo3v")

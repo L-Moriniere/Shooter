@@ -70,7 +70,7 @@ volume_db = -40.0
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_bsdmw")
-volume_db = -30.0
+volume_db = -15.0
 
 [node name="PowerUpSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_fyyos")

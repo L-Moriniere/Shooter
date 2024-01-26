@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-@export var speed = randi_range(80,165)
+@export var speed = randi_range(80,130)
 const explosion = preload("res://scene/explosion.tscn") 
 
 @onready var player = get_node("/root/Main/Player")
@@ -13,6 +13,9 @@ const explosion = preload("res://scene/explosion.tscn")
 var health = Globals.tie_interceptor_health
 var disable_shoot : bool = false
 
+
+func _ready():
+	$ShootTimer.start()
 	
 	
 func _physics_process(delta):
